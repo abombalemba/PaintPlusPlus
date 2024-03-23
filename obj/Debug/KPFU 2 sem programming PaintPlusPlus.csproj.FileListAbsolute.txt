@@ -1,0 +1,11 @@
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\bin\Debug\KPFU 2 sem programming PaintPlusPlus.exe.config
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\bin\Debug\KPFU 2 sem programming PaintPlusPlus.exe
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\bin\Debug\KPFU 2 sem programming PaintPlusPlus.pdb
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU 2 sem programming PaintPlusPlus.csproj.AssemblyReference.cache
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU_2_sem_programming_PaintPlusPlus.FormMain.resources
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.resources
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU 2 sem programming PaintPlusPlus.csproj.GenerateResource.cache
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU 2 sem programming PaintPlusPlus.csproj.CoreCompileInputs.cache
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU 2 sem programming PaintPlusPlus.exe
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU 2 sem programming PaintPlusPlus.pdb
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU_2_sem_programming_PaintPlusPlus.FormSave.resources
