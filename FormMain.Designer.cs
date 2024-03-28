@@ -27,30 +27,40 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.formMainStatusBar = new System.Windows.Forms.StatusStrip();
             this.formMainStatusBarVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.formMainStatusBarSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.formMainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formMainFileCreate = new System.Windows.Forms.ToolStripMenuItem();
-            this.formMainFileOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.formMainFileSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.formMainFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.formMainFilePrint = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.formMainFileExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.главнаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.видToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.formMainMenuStripFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripFileCreate = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripFileOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripFileSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripFileSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.formMainMenuStripFilePrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripFileSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.formMainMenuStripFileExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripMain = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripView = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripViewScale = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripViewScaleUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripViewScaleDown = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripViewScaleRecover = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripViewStatusBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripReference = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripReferenceAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainPanel = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.formMainTrackBar = new System.Windows.Forms.TrackBar();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.formMainRubber = new System.Windows.Forms.Button();
             this.formMainChooseColor = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.formMainGroupColor = new System.Windows.Forms.GroupBox();
             this.formMainGroupColorPurple = new System.Windows.Forms.Button();
             this.formMainGroupColorDarkBlue = new System.Windows.Forms.Button();
             this.formMainGroupColorPink = new System.Windows.Forms.Button();
@@ -75,8 +85,10 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainPictureBox = new System.Windows.Forms.PictureBox();
             this.formMainStatusBar.SuspendLayout();
             this.formMainMenuStrip.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.formMainPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.formMainTrackBar)).BeginInit();
+            this.formMainGroupColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.formMainPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,7 +97,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainStatusBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.formMainStatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.formMainStatusBarVersion,
-            this.toolStripStatusLabel2,
+            this.formMainStatusBarSize,
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel5});
@@ -101,16 +113,15 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.formMainStatusBarVersion.Name = "formMainStatusBarVersion";
             this.formMainStatusBarVersion.Size = new System.Drawing.Size(98, 24);
-            this.formMainStatusBarVersion.Text = "Version: 1.0.0";
+            this.formMainStatusBarVersion.Text = "Version: 1.2.0";
             // 
-            // toolStripStatusLabel2
+            // formMainStatusBarSize
             // 
-            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            this.formMainStatusBarSize.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(155, 24);
-            this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
+            this.formMainStatusBarSize.Name = "formMainStatusBarSize";
+            this.formMainStatusBarSize.Size = new System.Drawing.Size(4, 24);
             // 
             // toolStripStatusLabel3
             // 
@@ -143,113 +154,210 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             // 
             this.formMainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.formMainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem,
-            this.главнаяToolStripMenuItem,
-            this.видToolStripMenuItem});
+            this.formMainMenuStripFile,
+            this.formMainMenuStripMain,
+            this.formMainMenuStripView,
+            this.formMainMenuStripReference});
             this.formMainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.formMainMenuStrip.Name = "formMainMenuStrip";
             this.formMainMenuStrip.Size = new System.Drawing.Size(782, 28);
             this.formMainMenuStrip.TabIndex = 1;
             // 
-            // файлToolStripMenuItem
+            // formMainMenuStripFile
             // 
-            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.formMainFileCreate,
-            this.formMainFileOpen,
-            this.formMainFileSave,
-            this.formMainFileSaveAs,
-            this.toolStripSeparator1,
-            this.formMainFilePrint,
-            this.toolStripSeparator2,
-            this.formMainFileExit});
-            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
-            this.файлToolStripMenuItem.Text = "Файл";
+            this.formMainMenuStripFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formMainMenuStripFileCreate,
+            this.formMainMenuStripFileOpen,
+            this.formMainMenuStripFileSave,
+            this.formMainMenuStripFileSaveAs,
+            this.formMainMenuStripFileSeparator1,
+            this.formMainMenuStripFilePrint,
+            this.formMainMenuStripFileSeparator2,
+            this.formMainMenuStripFileExit});
+            this.formMainMenuStripFile.Name = "formMainMenuStripFile";
+            this.formMainMenuStripFile.Size = new System.Drawing.Size(59, 26);
+            this.formMainMenuStripFile.Text = "Файл";
             // 
-            // formMainFileCreate
+            // formMainMenuStripFileCreate
             // 
-            this.formMainFileCreate.Name = "formMainFileCreate";
-            this.formMainFileCreate.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.formMainFileCreate.Size = new System.Drawing.Size(309, 26);
-            this.formMainFileCreate.Text = "Создать";
-            this.formMainFileCreate.Click += new System.EventHandler(this.formMainFileCreate_Click);
+            this.formMainMenuStripFileCreate.Name = "formMainMenuStripFileCreate";
+            this.formMainMenuStripFileCreate.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.formMainMenuStripFileCreate.Size = new System.Drawing.Size(309, 26);
+            this.formMainMenuStripFileCreate.Text = "Создать";
+            this.formMainMenuStripFileCreate.Click += new System.EventHandler(this.formMainFileCreate_Click);
             // 
-            // formMainFileOpen
+            // formMainMenuStripFileOpen
             // 
-            this.formMainFileOpen.Name = "formMainFileOpen";
-            this.formMainFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.formMainFileOpen.Size = new System.Drawing.Size(309, 26);
-            this.formMainFileOpen.Text = "Открыть...";
-            this.formMainFileOpen.Click += new System.EventHandler(this.formMainFileOpen_Click);
+            this.formMainMenuStripFileOpen.Name = "formMainMenuStripFileOpen";
+            this.formMainMenuStripFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.formMainMenuStripFileOpen.Size = new System.Drawing.Size(309, 26);
+            this.formMainMenuStripFileOpen.Text = "Открыть...";
+            this.formMainMenuStripFileOpen.Click += new System.EventHandler(this.formMainFileOpen_Click);
             // 
-            // formMainFileSave
+            // formMainMenuStripFileSave
             // 
-            this.formMainFileSave.Name = "formMainFileSave";
-            this.formMainFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.formMainFileSave.Size = new System.Drawing.Size(309, 26);
-            this.formMainFileSave.Text = "Сохранить";
-            this.formMainFileSave.Click += new System.EventHandler(this.formMainFileSave_Click);
+            this.formMainMenuStripFileSave.Name = "formMainMenuStripFileSave";
+            this.formMainMenuStripFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.formMainMenuStripFileSave.Size = new System.Drawing.Size(309, 26);
+            this.formMainMenuStripFileSave.Text = "Сохранить";
+            this.formMainMenuStripFileSave.Click += new System.EventHandler(this.formMainFileSave_Click);
             // 
-            // formMainFileSaveAs
+            // formMainMenuStripFileSaveAs
             // 
-            this.formMainFileSaveAs.Name = "formMainFileSaveAs";
-            this.formMainFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.formMainMenuStripFileSaveAs.Name = "formMainMenuStripFileSaveAs";
+            this.formMainMenuStripFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.formMainFileSaveAs.Size = new System.Drawing.Size(309, 26);
-            this.formMainFileSaveAs.Text = "Сохранить как...";
-            this.formMainFileSaveAs.Click += new System.EventHandler(this.formMainFileSaveAs_Click);
+            this.formMainMenuStripFileSaveAs.Size = new System.Drawing.Size(309, 26);
+            this.formMainMenuStripFileSaveAs.Text = "Сохранить как...";
+            this.formMainMenuStripFileSaveAs.Click += new System.EventHandler(this.formMainFileSaveAs_Click);
             // 
-            // toolStripSeparator1
+            // formMainMenuStripFileSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(306, 6);
+            this.formMainMenuStripFileSeparator1.Name = "formMainMenuStripFileSeparator1";
+            this.formMainMenuStripFileSeparator1.Size = new System.Drawing.Size(306, 6);
             // 
-            // formMainFilePrint
+            // formMainMenuStripFilePrint
             // 
-            this.formMainFilePrint.Name = "formMainFilePrint";
-            this.formMainFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.formMainFilePrint.Size = new System.Drawing.Size(309, 26);
-            this.formMainFilePrint.Text = "Печать";
-            this.formMainFilePrint.Click += new System.EventHandler(this.formMainFilePrint_Click);
+            this.formMainMenuStripFilePrint.Name = "formMainMenuStripFilePrint";
+            this.formMainMenuStripFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.formMainMenuStripFilePrint.Size = new System.Drawing.Size(309, 26);
+            this.formMainMenuStripFilePrint.Text = "Печать";
+            this.formMainMenuStripFilePrint.Click += new System.EventHandler(this.formMainFilePrint_Click);
             // 
-            // toolStripSeparator2
+            // formMainMenuStripFileSeparator2
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(306, 6);
+            this.formMainMenuStripFileSeparator2.Name = "formMainMenuStripFileSeparator2";
+            this.formMainMenuStripFileSeparator2.Size = new System.Drawing.Size(306, 6);
             // 
-            // formMainFileExit
+            // formMainMenuStripFileExit
             // 
-            this.formMainFileExit.Name = "formMainFileExit";
-            this.formMainFileExit.Size = new System.Drawing.Size(309, 26);
-            this.formMainFileExit.Text = "Выход";
-            this.formMainFileExit.Click += new System.EventHandler(this.formMainFileExit_Click);
+            this.formMainMenuStripFileExit.Name = "formMainMenuStripFileExit";
+            this.formMainMenuStripFileExit.Size = new System.Drawing.Size(309, 26);
+            this.formMainMenuStripFileExit.Text = "Выход";
+            this.formMainMenuStripFileExit.Click += new System.EventHandler(this.formMainFileExit_Click);
             // 
-            // главнаяToolStripMenuItem
+            // formMainMenuStripMain
             // 
-            this.главнаяToolStripMenuItem.Name = "главнаяToolStripMenuItem";
-            this.главнаяToolStripMenuItem.Size = new System.Drawing.Size(79, 24);
-            this.главнаяToolStripMenuItem.Text = "Главная";
+            this.formMainMenuStripMain.Name = "formMainMenuStripMain";
+            this.formMainMenuStripMain.Size = new System.Drawing.Size(79, 26);
+            this.formMainMenuStripMain.Text = "Главная";
             // 
-            // видToolStripMenuItem
+            // formMainMenuStripView
             // 
-            this.видToolStripMenuItem.Name = "видToolStripMenuItem";
-            this.видToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
-            this.видToolStripMenuItem.Text = "Вид";
+            this.formMainMenuStripView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formMainMenuStripViewScale,
+            this.formMainMenuStripViewStatusBar});
+            this.formMainMenuStripView.Name = "formMainMenuStripView";
+            this.formMainMenuStripView.Size = new System.Drawing.Size(49, 26);
+            this.formMainMenuStripView.Text = "Вид";
             // 
-            // panel1
+            // formMainMenuStripViewScale
             // 
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.formMainRubber);
-            this.panel1.Controls.Add(this.formMainChooseColor);
-            this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 28);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(782, 63);
-            this.panel1.TabIndex = 3;
+            this.formMainMenuStripViewScale.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formMainMenuStripViewScaleUp,
+            this.formMainMenuStripViewScaleDown,
+            this.formMainMenuStripViewScaleRecover});
+            this.formMainMenuStripViewScale.Name = "formMainMenuStripViewScale";
+            this.formMainMenuStripViewScale.Size = new System.Drawing.Size(216, 26);
+            this.formMainMenuStripViewScale.Text = "Масштаб";
+            // 
+            // formMainMenuStripViewScaleUp
+            // 
+            this.formMainMenuStripViewScaleUp.Name = "formMainMenuStripViewScaleUp";
+            this.formMainMenuStripViewScaleUp.ShortcutKeyDisplayString = "CTRL + плюс (+)";
+            this.formMainMenuStripViewScaleUp.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemplus)));
+            this.formMainMenuStripViewScaleUp.Size = new System.Drawing.Size(312, 26);
+            this.formMainMenuStripViewScaleUp.Text = "Увеличить";
+            this.formMainMenuStripViewScaleUp.Click += new System.EventHandler(this.formMainMenuStripViewScaleUp_Click);
+            // 
+            // formMainMenuStripViewScaleDown
+            // 
+            this.formMainMenuStripViewScaleDown.Name = "formMainMenuStripViewScaleDown";
+            this.formMainMenuStripViewScaleDown.ShortcutKeyDisplayString = "CTRL + минус (-)";
+            this.formMainMenuStripViewScaleDown.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemMinus)));
+            this.formMainMenuStripViewScaleDown.Size = new System.Drawing.Size(312, 26);
+            this.formMainMenuStripViewScaleDown.Text = "Уменьшить";
+            this.formMainMenuStripViewScaleDown.Click += new System.EventHandler(this.formMainMenuStripViewScaleDown_Click);
+            // 
+            // formMainMenuStripViewScaleRecover
+            // 
+            this.formMainMenuStripViewScaleRecover.Name = "formMainMenuStripViewScaleRecover";
+            this.formMainMenuStripViewScaleRecover.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
+            this.formMainMenuStripViewScaleRecover.Size = new System.Drawing.Size(312, 26);
+            this.formMainMenuStripViewScaleRecover.Text = "Восстановить масштаб";
+            this.formMainMenuStripViewScaleRecover.Click += new System.EventHandler(this.formMainMenuStripViewScaleRecover_Click);
+            // 
+            // formMainMenuStripViewStatusBar
+            // 
+            this.formMainMenuStripViewStatusBar.Checked = true;
+            this.formMainMenuStripViewStatusBar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.formMainMenuStripViewStatusBar.Name = "formMainMenuStripViewStatusBar";
+            this.formMainMenuStripViewStatusBar.Size = new System.Drawing.Size(216, 26);
+            this.formMainMenuStripViewStatusBar.Text = "Строка состояния";
+            this.formMainMenuStripViewStatusBar.Click += new System.EventHandler(this.formMainMenuStripViewStatusBar_Click);
+            // 
+            // formMainMenuStripReference
+            // 
+            this.formMainMenuStripReference.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formMainMenuStripReferenceAbout});
+            this.formMainMenuStripReference.Name = "formMainMenuStripReference";
+            this.formMainMenuStripReference.Size = new System.Drawing.Size(81, 26);
+            this.formMainMenuStripReference.Text = "Справка";
+            // 
+            // formMainMenuStripReferenceAbout
+            // 
+            this.formMainMenuStripReferenceAbout.Name = "formMainMenuStripReferenceAbout";
+            this.formMainMenuStripReferenceAbout.Size = new System.Drawing.Size(187, 26);
+            this.formMainMenuStripReferenceAbout.Text = "О программе";
+            this.formMainMenuStripReferenceAbout.Click += new System.EventHandler(this.formMainMenuStripReferenceAbout_Click);
+            // 
+            // formMainPanel
+            // 
+            this.formMainPanel.Controls.Add(this.groupBox1);
+            this.formMainPanel.Controls.Add(this.formMainTrackBar);
+            this.formMainPanel.Controls.Add(this.button4);
+            this.formMainPanel.Controls.Add(this.button3);
+            this.formMainPanel.Controls.Add(this.button2);
+            this.formMainPanel.Controls.Add(this.button1);
+            this.formMainPanel.Controls.Add(this.formMainRubber);
+            this.formMainPanel.Controls.Add(this.formMainChooseColor);
+            this.formMainPanel.Controls.Add(this.formMainGroupColor);
+            this.formMainPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.formMainPanel.Location = new System.Drawing.Point(0, 28);
+            this.formMainPanel.Name = "formMainPanel";
+            this.formMainPanel.Size = new System.Drawing.Size(782, 203);
+            this.formMainPanel.TabIndex = 3;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Location = new System.Drawing.Point(133, 114);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "фигурки";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(6, 21);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 0;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // formMainTrackBar
+            // 
+            this.formMainTrackBar.Location = new System.Drawing.Point(287, 0);
+            this.formMainTrackBar.Maximum = 5;
+            this.formMainTrackBar.Minimum = 1;
+            this.formMainTrackBar.Name = "formMainTrackBar";
+            this.formMainTrackBar.Size = new System.Drawing.Size(101, 56);
+            this.formMainTrackBar.TabIndex = 7;
+            this.formMainTrackBar.Value = 3;
+            this.formMainTrackBar.Scroll += new System.EventHandler(this.formMainTrackBar_Scroll);
             // 
             // button4
             // 
@@ -294,9 +402,10 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             // formMainRubber
             // 
             this.formMainRubber.BackgroundImage = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.ruuber__2_;
-            this.formMainRubber.Location = new System.Drawing.Point(298, 23);
+            this.formMainRubber.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.formMainRubber.Location = new System.Drawing.Point(207, 0);
             this.formMainRubber.Name = "formMainRubber";
-            this.formMainRubber.Size = new System.Drawing.Size(25, 25);
+            this.formMainRubber.Size = new System.Drawing.Size(54, 48);
             this.formMainRubber.TabIndex = 2;
             this.formMainRubber.Tag = "Ластик";
             this.formMainRubber.UseVisualStyleBackColor = false;
@@ -305,39 +414,40 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             // formMainChooseColor
             // 
             this.formMainChooseColor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("formMainChooseColor.BackgroundImage")));
-            this.formMainChooseColor.Location = new System.Drawing.Point(394, 10);
+            this.formMainChooseColor.Location = new System.Drawing.Point(394, 3);
             this.formMainChooseColor.Name = "formMainChooseColor";
             this.formMainChooseColor.Size = new System.Drawing.Size(50, 50);
             this.formMainChooseColor.TabIndex = 1;
             this.formMainChooseColor.UseVisualStyleBackColor = true;
+            this.formMainChooseColor.Click += new System.EventHandler(this.formMainChooseColor_Click);
             // 
-            // groupBox1
+            // formMainGroupColor
             // 
-            this.groupBox1.Controls.Add(this.formMainGroupColorPurple);
-            this.groupBox1.Controls.Add(this.formMainGroupColorDarkBlue);
-            this.groupBox1.Controls.Add(this.formMainGroupColorPink);
-            this.groupBox1.Controls.Add(this.formMainGroupColorTurquoise);
-            this.groupBox1.Controls.Add(this.formMainGroupColorLightBlue);
-            this.groupBox1.Controls.Add(this.formMainGroupColorBlue);
-            this.groupBox1.Controls.Add(this.formMainGroupColorLime);
-            this.groupBox1.Controls.Add(this.formMainGroupColorGreen);
-            this.groupBox1.Controls.Add(this.formMainGroupColorLightYellow);
-            this.groupBox1.Controls.Add(this.formMainGroupColorLightOrange);
-            this.groupBox1.Controls.Add(this.formMainGroupColorLightRed);
-            this.groupBox1.Controls.Add(this.formMainGroupColorBrown);
-            this.groupBox1.Controls.Add(this.formMainGroupColorLightGray);
-            this.groupBox1.Controls.Add(this.formMainGroupColorWhite);
-            this.groupBox1.Controls.Add(this.formMainGroupColorYellow);
-            this.groupBox1.Controls.Add(this.formMainGroupColorOrange);
-            this.groupBox1.Controls.Add(this.formMainGroupColorRed);
-            this.groupBox1.Controls.Add(this.formMainGroupColorVinous);
-            this.groupBox1.Controls.Add(this.formMainGroupColorGray);
-            this.groupBox1.Controls.Add(this.formMainGroupColorBlack);
-            this.groupBox1.Location = new System.Drawing.Point(450, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(320, 73);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorPurple);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorDarkBlue);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorPink);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorTurquoise);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorLightBlue);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorBlue);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorLime);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorGreen);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorLightYellow);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorLightOrange);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorLightRed);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorBrown);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorLightGray);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorWhite);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorYellow);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorOrange);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorRed);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorVinous);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorGray);
+            this.formMainGroupColor.Controls.Add(this.formMainGroupColorBlack);
+            this.formMainGroupColor.Location = new System.Drawing.Point(450, 0);
+            this.formMainGroupColor.Name = "formMainGroupColor";
+            this.formMainGroupColor.Size = new System.Drawing.Size(320, 73);
+            this.formMainGroupColor.TabIndex = 0;
+            this.formMainGroupColor.TabStop = false;
             // 
             // formMainGroupColorPurple
             // 
@@ -543,9 +653,9 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             // 
             this.formMainPictureBox.BackColor = System.Drawing.Color.White;
             this.formMainPictureBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.formMainPictureBox.Location = new System.Drawing.Point(0, 100);
+            this.formMainPictureBox.Location = new System.Drawing.Point(0, 255);
             this.formMainPictureBox.Name = "formMainPictureBox";
-            this.formMainPictureBox.Size = new System.Drawing.Size(782, 323);
+            this.formMainPictureBox.Size = new System.Drawing.Size(782, 168);
             this.formMainPictureBox.TabIndex = 2;
             this.formMainPictureBox.TabStop = false;
             this.formMainPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.formMainPictureBox_MouseDown);
@@ -557,17 +667,21 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 453);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.formMainPanel);
             this.Controls.Add(this.formMainPictureBox);
             this.Controls.Add(this.formMainStatusBar);
             this.Controls.Add(this.formMainMenuStrip);
             this.Name = "FormMain";
+            this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.formMainStatusBar.ResumeLayout(false);
             this.formMainStatusBar.PerformLayout();
             this.formMainMenuStrip.ResumeLayout(false);
             this.formMainMenuStrip.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.formMainPanel.ResumeLayout(false);
+            this.formMainPanel.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.formMainTrackBar)).EndInit();
+            this.formMainGroupColor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.formMainPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -579,17 +693,15 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         private System.Windows.Forms.StatusStrip formMainStatusBar;
         private System.Windows.Forms.MenuStrip formMainMenuStrip;
         private System.Windows.Forms.ToolStripStatusLabel formMainStatusBarVersion;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel formMainStatusBarSize;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem formMainFileCreate;
-        private System.Windows.Forms.ToolStripMenuItem видToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripFile;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripFileCreate;
         private System.Windows.Forms.PictureBox formMainPictureBox;
-        private System.Windows.Forms.ToolStripMenuItem главнаяToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Panel formMainPanel;
+        private System.Windows.Forms.GroupBox formMainGroupColor;
         private System.Windows.Forms.Button formMainGroupColorLightYellow;
         private System.Windows.Forms.Button formMainGroupColorLightOrange;
         private System.Windows.Forms.Button formMainGroupColorLightRed;
@@ -612,18 +724,30 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         private System.Windows.Forms.Button formMainGroupColorGreen;
         private System.Windows.Forms.ColorDialog formMainColorDialog;
         private System.Windows.Forms.Button formMainChooseColor;
-        private System.Windows.Forms.ToolStripMenuItem formMainFileOpen;
-        private System.Windows.Forms.ToolStripMenuItem formMainFileSave;
-        private System.Windows.Forms.ToolStripMenuItem formMainFileSaveAs;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem formMainFilePrint;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem formMainFileExit;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripFileOpen;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripFileSave;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripFileSaveAs;
+        private System.Windows.Forms.ToolStripSeparator formMainMenuStripFileSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripFilePrint;
+        private System.Windows.Forms.ToolStripSeparator formMainMenuStripFileSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripFileExit;
         private System.Windows.Forms.Button formMainRubber;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TrackBar formMainTrackBar;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripMain;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripView;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripReference;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripReferenceAbout;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripViewScale;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripViewScaleUp;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripViewScaleDown;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripViewScaleRecover;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripViewStatusBar;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button5;
     }
 }
 

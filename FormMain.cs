@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 
 namespace KPFU_2_sem_programming_PaintPlusPlus {
@@ -30,8 +32,8 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         public FormMain() {
             InitializeComponent();
 
-            ofd.Filter = "";
-            sfd.Filter = "";
+            ofd.Filter = "Bitmap file|*.bmp|Any format|*.*";
+            sfd.Filter = "Bitmap file|*.bmp|Any format|*.*";
 
             pen = createTool("Карандаш");
 
@@ -42,8 +44,11 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             updateStatusBar();
         }
 
-        public void resizeForm() {
+        private void resizeForm() {
+            formMainPictureBox.Width = this.Width - 30;
+            formMainPictureBox.Height = this.Height - 120;
 
+            updateStatusBar();
         }
 
         private void changeIcon() {
@@ -73,7 +78,9 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         }
 
         public void updateStatusBar() {
-
+            formMainStatusBarSize.Text = string.Format("{0} x {1}", this.Width, this.Height);
+            formMainStatusBar.Update();
+            formMainStatusBar.Refresh();
         }
 
         private Pen createTool(string what) {
@@ -83,29 +90,29 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
 
             switch (what) {
                 case "Карандаш":
-                    p.Color = Color.Black;
-                    p.Width = 1;
-                    break;
+                p.Color = Color.Black;
+                p.Width = 3;
+                break;
 
                 case "Маркер":
-                    p.Color = Color.DarkCyan;
-                    p.Width = 4;
-                    break;
+                p.Color = Color.DarkCyan;
+                p.Width = 3;
+                break;
 
                 case "Фломастер":
-                    p.Color = Color.Gainsboro;
-                    p.Width = 8;
-                    break;
+                p.Color = Color.Gainsboro;
+                p.Width = 3;
+                break;
 
                 case "Кисточка":
-                    p.Color = Color.Yellow;
-                    p.Width = 12;
-                    break;
+                p.Color = Color.Yellow;
+                p.Width = 3;
+                break;
 
                 case "Ластик":
-                    p.Color = Color.White;
-                    p.Width = 30;
-                    break;
+                p.Color = Color.White;
+                p.Width = 3;
+                break;
             }
 
             return p;
@@ -153,13 +160,6 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
 
         private void formMainGroupColorSetColor(object sender, EventArgs e) {
             pen.Color = ((Button) sender).BackColor;
-        }
-
-        private void formMainGroupColorChoose_Click(object sender, EventArgs e) {
-            if (formMainColorDialog.ShowDialog() == DialogResult.OK) {
-                pen.Color = formMainColorDialog.Color;
-                ((Button) sender).BackColor = formMainColorDialog.Color;
-            }
         }
 
         private void button20_Click(object sender, EventArgs e) {
@@ -214,8 +214,10 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             if (ofd.ShowDialog() == DialogResult.OK) {
                 fileName = ofd.FileName;
 
-                if (fileName.EndsWith(".jpg")) {
-
+                if (fileName.EndsWith(".bmp")) {
+                    formMainPictureBox.Image = new Bitmap(ofd.FileName);
+                } else {
+                    formMainPictureBox.Image = new Bitmap(ofd.FileName);
                 }
 
                 fileIsNew = false;
@@ -223,22 +225,55 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             } else {
                 return;
             }
+
+            changeTitle();
+            changeIcon();
         }
 
         private void formMainFileSave_Click(object sender, EventArgs e) {
+            if (fileIsNew == true) {
+                if (sfd.ShowDialog() == DialogResult.OK) {
+                    saveFile();
 
+                    fileIsNew = false;
+                } else {
+                    fileIsSaved = false;
+                }
+            } else {
+                saveFile();
+            }
         }
 
         private void formMainFileSaveAs_Click(object sender, EventArgs e) {
-
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                saveFile();
+            }
         }
 
         private void formMainFilePrint_Click(object sender, EventArgs e) {
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.PrintPage += PrintPageHandler;
 
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = printDocument;
+
+            if (printDialog.ShowDialog() == DialogResult.OK) {
+                printDialog.Document.Print();
+            }
+        }
+
+        private void PrintPageHandler(object sender, PrintPageEventArgs e) {
+            e.Graphics.DrawImageUnscaled(formMainPictureBox.Image, 0, 0);
         }
 
         private void formMainFileExit_Click(object sender, EventArgs e) {
+            if (fileIsSaved == false) {
+                if (showFormSave() == false) {
+                    return;
+                }
+            }
 
+            this.Close();
         }
 
         private bool showFormSave() {
@@ -271,12 +306,81 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         }
 
         private bool saveFile() {
+            if (sfd.FileName.EndsWith(".bmp")) {
+                formMainPictureBox.Image.Save(sfd.FileName, ImageFormat.Bmp);
+            } else if (sfd.FileName.EndsWith(".jpg")) {
+                formMainPictureBox.Image.Save(sfd.FileName, ImageFormat.Jpeg);
+            } else if (sfd.FileName.EndsWith(".png")) {
+                formMainPictureBox.Image.Save(sfd.FileName, ImageFormat.Png);
+            } else if (sfd.FileName.EndsWith(".tiff")) {
+                formMainPictureBox.Image.Save(sfd.FileName, ImageFormat.Tiff);
+            }
+            
             fileName = sfd.FileName;
             fileIsSaved = true;
             changeTitle();
             changeIcon();
 
             return true;
+        }
+
+        private void FormMain_Resize(object sender, EventArgs e) {
+            resizeForm();
+        }
+
+        private void formMainTrackBar_Scroll(object sender, EventArgs e) {
+            pen.Width = formMainTrackBar.Value;
+        }
+
+        private void formMainChooseColor_Click(object sender, EventArgs e) {
+            if (formMainColorDialog.ShowDialog() == DialogResult.OK) {
+                pen.Color = formMainColorDialog.Color;
+                ((Button) sender).BackColor = formMainColorDialog.Color;
+            }
+        }
+
+        private void formMainMenuStripReferenceAbout_Click(object sender, EventArgs e) {
+            new FormAbout().Show();
+        }
+
+        private void formMainMenuStripViewStatusBar_Click(object sender, EventArgs e) {
+            if (formMainMenuStripViewStatusBar.CheckState == CheckState.Checked) {
+                formMainMenuStripViewStatusBar.CheckState = CheckState.Unchecked;
+                formMainStatusBar.Visible = false;
+                formMainPictureBox.Size = new Size(formMainMenuStripViewStatusBar.Size.Width, formMainPictureBox.Size.Height + formMainMenuStripViewStatusBar.Size.Height);
+            } else {
+                formMainMenuStripViewStatusBar.CheckState = CheckState.Checked;
+                formMainStatusBar.Visible = true;
+                formMainPictureBox.Size = new Size(formMainMenuStripViewStatusBar.Size.Width, formMainPictureBox.Size.Height - formMainMenuStripViewStatusBar.Size.Height);
+            }
+        }
+
+        private void formMainMenuStripViewScaleUp_Click(object sender, EventArgs e) {
+            changeZoom("up");
+        }
+
+        private void formMainMenuStripViewScaleDown_Click(object sender, EventArgs e) {
+            changeZoom("down");
+        }
+
+        private void formMainMenuStripViewScaleRecover_Click(object sender, EventArgs e) {
+            changeZoom("recover");
+        }
+
+        private void changeZoom(string value) {
+
+            updateStatusBar();
+        }
+
+        private void button5_Click(object sender, EventArgs e) {
+            /*MouseEventArgs mouse = e as MouseEventArgs;
+            if (mouse != null) {
+                int x = mouse.X;
+                int y = mouse.Y;
+            }
+            graphics = Graphics.FromImage(formMainPictureBox.Image);
+            Rectangle rect = new Rectangle();
+            graphics.DrawRectangle(pen, rect);*/
         }
     }
 
