@@ -9,3 +9,4 @@ C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\ob
 C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU 2 sem programming PaintPlusPlus.exe
 C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU 2 sem programming PaintPlusPlus.pdb
 C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU_2_sem_programming_PaintPlusPlus.FormSave.resources
+C:\Users\Владислав\Source\Repos\KPFU 2 sem programming PaintPlusPlus\obj\Debug\KPFU_2_sem_programming_PaintPlusPlus.InputText.resources

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayPoints.cs" />
     <Compile Include="FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,13 +65,23 @@
     <Compile Include="FormSave.Designer.cs">
       <DependentUpon>FormSave.cs</DependentUpon>
     </Compile>
+    <Compile Include="InputText.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputText.Designer.cs">
+      <DependentUpon>InputText.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Text.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSave.resx">
       <DependentUpon>FormSave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputText.resx">
+      <DependentUpon>InputText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -109,6 +120,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\Resources\ruuber %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\fsquare.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\ftriangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\fellipse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\fline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\fill.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\text.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

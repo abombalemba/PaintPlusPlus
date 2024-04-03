@@ -1,0 +1,4 @@
+0 - line
+1 - square
+2 - triagnle
+3 - ellipse

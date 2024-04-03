@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace KPFU_2_sem_programming_PaintPlusPlus {
     public partial class FormMain : Form {
@@ -12,7 +13,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
 
         private bool fileIsSaved = true;
         private bool fileIsNew = true;
-
+         
         private OpenFileDialog ofd = new OpenFileDialog();
         private SaveFileDialog sfd = new SaveFileDialog();
 
@@ -23,18 +24,32 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         private Point mouseDownPoint = Point.Empty;
         private Point mousePoint = Point.Empty;
 
-        private ArrayPonits arrayPoints = new ArrayPonits(2);
+        private byte figure = 0; // see documentation
+        private bool isPaintingFigure = false;
+        private bool isPrintingText = false;
+        private string printingText = string.Empty;
+        private byte printingTextSize = 0;
+        private Point paintingFigureFirstPoint;
+        private Point paintingFigureSecondPoint;
 
-        private Bitmap map = new Bitmap(800, 500);
+        private ArrayPoints arrayPoints = new ArrayPoints(2);
+
+        private List<object> allObjects = new List<object>();
+
+        private int windowSizeX = Screen.PrimaryScreen.Bounds.Width;
+        private int windowSizeY = Screen.PrimaryScreen.Bounds.Height;
+
+        private Bitmap map;
         private Graphics graphics;
         private Pen pen;
 
         public FormMain() {
             InitializeComponent();
 
-            ofd.Filter = "Bitmap file|*.bmp|Any format|*.*";
-            sfd.Filter = "Bitmap file|*.bmp|Any format|*.*";
+            ofd.Filter = "Bitmap file|*.bmp|PNG file|.png|JPG file|.jpg|TIFF file|.tiff|GIF file|.gif|Any format|*.*";
+            sfd.Filter = "Bitmap file|*.bmp|PNG file|.png|JPG file|.jpg|TIFF file|.tiff|GIF file|.gif|Any format|*.*";
 
+            map = new Bitmap(windowSizeX, windowSizeY);
             pen = createTool("Карандаш");
 
             setSize();
@@ -42,6 +57,8 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             changeIcon();
             changeTitle();
             updateStatusBar();
+            resetPaintingFigure();
+            resetPrintingText();
         }
 
         private void resizeForm() {
@@ -78,7 +95,8 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         }
 
         public void updateStatusBar() {
-            formMainStatusBarSize.Text = string.Format("{0} x {1}", this.Width, this.Height);
+            formMainStatusBarSize.Text = string.Format("Размер окна: {0} x {1}", this.Width, this.Height);
+            formMainStatusBarScale.Text = "Масштаб: 100%";
             formMainStatusBar.Update();
             formMainStatusBar.Refresh();
         }
@@ -114,6 +132,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
                 p.Width = 3;
                 break;
             }
+            figure = 0;
 
             return p;
         }
@@ -121,13 +140,16 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         private void formMainPictureBox_MouseDown(object sender, MouseEventArgs e) {
             mouseDown = true;
             mousePoint = mouseDownPoint = e.Location;
-        }
 
-        private void formMainPictureBox_MouseUp(object sender, MouseEventArgs e) {
-            mouseDown = false;
-            arrayPoints.resetPoints();
-
-            fileIsSaved = false;
+            if (isPaintingFigure == true) {
+                paintingFigureFirstPoint = e.Location;
+            } else if (isPrintingText == true) {
+                graphics.DrawString(printingText, new Font("Arial", printingTextSize), pen.Brush, e.Location.X, e.Location.Y);
+                Text text = new Text(printingText, new Font("Arial", printingTextSize), pen.Brush, e.Location.X, e.Location.Y);
+                allObjects.Add(text);
+                printingText = string.Empty;
+                printingTextSize = 0;
+            }
 
             changeIcon();
             changeTitle();
@@ -140,13 +162,54 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
                 return;
             }
 
-            arrayPoints.setPoint(e.X, e.Y);
-
-            if (arrayPoints.getCountPoints() >= 2) {
-                graphics.DrawLines(pen, arrayPoints.getPoints());
+            if (isPaintingFigure == true) {
+                formMainPictureBox.Invalidate();
+                //formMainPictureBox.Invalidate();
+                Rectangle rect = RectFrom2Points(paintingFigureFirstPoint, e.Location);
+                graphics.DrawRectangle(pen, rect);
                 formMainPictureBox.Image = map;
+                //formMainPictureBox.Invalidate();
+            } else if (isPrintingText == true) {
+
+            } else {
                 arrayPoints.setPoint(e.X, e.Y);
+
+                if (arrayPoints.getCountPoints() >= 2) {
+                    graphics.DrawLines(pen, arrayPoints.getPoints());
+                    Point[] array = arrayPoints.getPoints();
+                    allObjects.Add(array);
+                    formMainPictureBox.Image = map;
+                    arrayPoints.setPoint(e.X, e.Y);
+                }
             }
+
+            changeIcon();
+            changeTitle();
+        }
+
+        private void formMainPictureBox_MouseUp(object sender, MouseEventArgs e) {
+            mouseDown = false;
+            arrayPoints.resetPoints();
+
+            if (isPaintingFigure == true) {
+                paintingFigureSecondPoint = e.Location;
+                Rectangle rect = RectFrom2Points(paintingFigureFirstPoint, paintingFigureSecondPoint);
+                allObjects.Add(rect);
+                graphics.DrawRectangle(pen, rect);
+                formMainPictureBox.Image = map;
+                formMainPictureBox.Invalidate();
+
+                resetPaintingFigure();
+            } else if (isPrintingText == true) {
+                isPrintingText = false;
+            }
+
+            this.formMainPictureBox.Cursor = Cursors.Default;
+
+            fileIsSaved = false;
+
+            changeIcon();
+            changeTitle();
         }
 
         private void setSize() {
@@ -162,23 +225,6 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             pen.Color = ((Button) sender).BackColor;
         }
 
-        private void button20_Click(object sender, EventArgs e) {
-            if (mouseDown == false) {
-                return;
-            }
-
-            Region region = new Region(this.ClientRectangle);
-            Rectangle rectangle = new Rectangle(
-                Math.Min(mouseDownPoint.X, mousePoint.X),
-                Math.Min(mouseDownPoint.Y, mousePoint.Y),
-                Math.Abs(mouseDownPoint.X - mousePoint.X),
-                Math.Abs(mouseDownPoint.Y - mousePoint.Y)
-            );
-
-            region.Xor(rectangle);
-            graphics.FillRectangle(Brushes.White, rectangle);
-        }
-
         private void formMainSelectTool(object sender, EventArgs e) {
             pen = createTool(((Button) sender).Tag.ToString());
         }
@@ -187,6 +233,8 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             fileName = fileUnnamed;
             fileIsNew = true;
             fileIsSaved = true;
+
+            graphics.Clear(Color.White);
 
             changeIcon();
             changeTitle();
@@ -214,11 +262,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             if (ofd.ShowDialog() == DialogResult.OK) {
                 fileName = ofd.FileName;
 
-                if (fileName.EndsWith(".bmp")) {
-                    formMainPictureBox.Image = new Bitmap(ofd.FileName);
-                } else {
-                    formMainPictureBox.Image = new Bitmap(ofd.FileName);
-                }
+                formMainPictureBox.Image = new Bitmap(ofd.FileName);
 
                 fileIsNew = false;
                 fileIsSaved = true;
@@ -306,16 +350,24 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         }
 
         private bool saveFile() {
+            ImageFormat imageFormat;
             if (sfd.FileName.EndsWith(".bmp")) {
-                formMainPictureBox.Image.Save(sfd.FileName, ImageFormat.Bmp);
+                imageFormat = ImageFormat.Bmp;
             } else if (sfd.FileName.EndsWith(".jpg")) {
-                formMainPictureBox.Image.Save(sfd.FileName, ImageFormat.Jpeg);
+                imageFormat = ImageFormat.Jpeg;
             } else if (sfd.FileName.EndsWith(".png")) {
-                formMainPictureBox.Image.Save(sfd.FileName, ImageFormat.Png);
+                imageFormat = ImageFormat.Png;
             } else if (sfd.FileName.EndsWith(".tiff")) {
-                formMainPictureBox.Image.Save(sfd.FileName, ImageFormat.Tiff);
+                imageFormat = ImageFormat.Tiff;
+            } else if (sfd.FileName.EndsWith(".gif")) {
+                imageFormat = ImageFormat.Gif;
+            } else {
+                imageFormat = ImageFormat.Bmp;
             }
-            
+
+            formMainPictureBox.Image.Save(sfd.FileName, imageFormat);
+
+
             fileName = sfd.FileName;
             fileIsSaved = true;
             changeTitle();
@@ -372,49 +424,82 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             updateStatusBar();
         }
 
-        private void button5_Click(object sender, EventArgs e) {
-            /*MouseEventArgs mouse = e as MouseEventArgs;
-            if (mouse != null) {
-                int x = mouse.X;
-                int y = mouse.Y;
+        private void formMainGroupFiguresSquare_Click(object sender, EventArgs e) {
+            isPaintingFigure = true;
+            figure = 1;
+            this.formMainPictureBox.Cursor = Cursors.Cross;
+        }
+
+        private void formMainGroupFiguresTriangle_Click(object sender, EventArgs e) {
+            isPaintingFigure = true;
+            figure = 2;
+            this.formMainPictureBox.Cursor = Cursors.Cross;
+        }
+
+        private void formMainGroupFiguresEllipse_Click(object sender, EventArgs e) {
+            isPaintingFigure = true;
+            figure = 3;
+            this.formMainPictureBox.Cursor = Cursors.Cross;
+        }
+
+        private void formMainGroupFiguresLine_Click(object sender, EventArgs e) {
+            isPaintingFigure = true;
+            figure = 4;
+            this.formMainPictureBox.Cursor = Cursors.Cross;
+        }
+
+        private Rectangle RectFrom2Points(Point start, Point end) {
+            Rectangle rect = new Rectangle(
+                Math.Min(start.X, end.X),
+                Math.Min(start.Y, end.Y),
+                Math.Abs(end.X - start.X),
+                Math.Abs(end.Y - start.Y)
+            );
+            return rect;
+        }
+
+        private void resetPaintingFigure() {
+            figure = 0;
+            isPaintingFigure = false;
+            paintingFigureFirstPoint = Point.Empty;
+            paintingFigureSecondPoint = Point.Empty;
+        }
+
+        private void resetPrintingText() {
+            isPrintingText = false;
+            printingText = string.Empty;
+            printingTextSize = 0;
+        }
+
+        private void formMainText_Click(object sender, EventArgs e) {
+            if (isPaintingFigure == false) {
+                InputText inputText = new InputText();
+
+                if (inputText.ShowDialog() == DialogResult.OK) {
+                    printingText = inputText.formInputTextTextBox.Text;
+                    printingTextSize = Convert.ToByte(inputText.formInputTextTextSize.Text);
+                    isPrintingText = true;
+                    this.formMainPictureBox.Cursor = Cursors.Cross;
+                } else {
+                    isPrintingText = false;
+                }
             }
-            graphics = Graphics.FromImage(formMainPictureBox.Image);
-            Rectangle rect = new Rectangle();
-            graphics.DrawRectangle(pen, rect);*/
         }
-    }
 
-    public class ArrayPonits {
-        private int index = 0;
-        private Point[] points;
+        private void drawAllObjects() {
 
-        public ArrayPonits(int size) {
-            if (size <= 0) {
-                size = 2;
+            foreach (object obj in allObjects) {
+                if (obj is Rectangle) {
+                    Rectangle rect = (Rectangle) obj;
+                    graphics.DrawRectangle(pen, rect);
+                } else if (obj is Text) {
+                    Text text = (Text) obj;
+                    
+                    //graphics.DrawString(pen, text);
+                } else if (obj is Point) {
+                    //graphics.DrawLines(pen, array);
+                }
             }
-
-            points = new Point[size];
-        }
-
-        public void setPoint(int x, int y) {
-            if (index >= points.Length) {
-                index = 0;
-            }
-
-            points[index] = new Point(x, y);
-            ++index;
-        }
-
-        public void resetPoints() {
-            index = 0;
-        }
-
-        public int getCountPoints() {
-            return index;
-        }
-
-        public Point[] getPoints() {
-            return points;
         }
     }
 }
