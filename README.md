@@ -1,2 +1,3 @@
 # PaintPlusPlus
-Windows Paint
+Windows Paint  
+C#, Windows Forms  
