@@ -61,7 +61,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             // 
             // formInputTextTextSize
             // 
-            this.formInputTextTextSize.FormattingEnabled = true;
+            this.formInputTextTextSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.formInputTextTextSize.Items.AddRange(new object[] {
             "8",
             "10",

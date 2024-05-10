@@ -8,7 +8,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         }
 
         private void formInputTextButton_Click(object sender, EventArgs e) {
-            if (formInputTextTextBox.Text.Length > 0) {
+            if (formInputTextTextBox.Text.Length > 0 && formInputTextTextSize.Text.Length > 0) {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

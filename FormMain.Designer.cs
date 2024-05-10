@@ -48,19 +48,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStripReference = new System.Windows.Forms.ToolStripMenuItem();
             this.formMainMenuStripReferenceAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.formMainPanel = new System.Windows.Forms.Panel();
-            this.formMainText = new System.Windows.Forms.Button();
-            this.formMainFill = new System.Windows.Forms.Button();
-            this.formMainGroupFigures = new System.Windows.Forms.GroupBox();
-            this.formMainGroupFiguresLine = new System.Windows.Forms.Button();
-            this.formMainGroupFiguresEllipse = new System.Windows.Forms.Button();
-            this.formMainGroupFiguresTriangle = new System.Windows.Forms.Button();
-            this.formMainGroupFiguresSquare = new System.Windows.Forms.Button();
             this.formMainTrackBar = new System.Windows.Forms.TrackBar();
-            this.formMainMarker = new System.Windows.Forms.Button();
-            this.formMainBrush = new System.Windows.Forms.Button();
-            this.formMainFeltTipPen = new System.Windows.Forms.Button();
-            this.formMainPen = new System.Windows.Forms.Button();
-            this.formMainRubber = new System.Windows.Forms.Button();
             this.formMainChooseColor = new System.Windows.Forms.Button();
             this.formMainGroupColor = new System.Windows.Forms.GroupBox();
             this.formMainGroupColorPurple = new System.Windows.Forms.Button();
@@ -85,13 +73,20 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainGroupColorBlack = new System.Windows.Forms.Button();
             this.formMainColorDialog = new System.Windows.Forms.ColorDialog();
             this.formMainPictureBox = new System.Windows.Forms.PictureBox();
+            this.formMainMenuStripTools = new System.Windows.Forms.MenuStrip();
+            this.formMainMenuStripToolsRect = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripToolsEllipse = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripToolsLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripToolsFill = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripToolsRubber = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripToolsText = new System.Windows.Forms.ToolStripMenuItem();
             this.formMainStatusBar.SuspendLayout();
             this.formMainMenuStrip.SuspendLayout();
             this.formMainPanel.SuspendLayout();
-            this.formMainGroupFigures.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.formMainTrackBar)).BeginInit();
             this.formMainGroupColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.formMainPictureBox)).BeginInit();
+            this.formMainMenuStripTools.SuspendLayout();
             this.SuspendLayout();
             // 
             // formMainStatusBar
@@ -113,7 +108,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.formMainStatusBarSize.Name = "formMainStatusBarSize";
-            this.formMainStatusBarSize.Size = new System.Drawing.Size(333, 24);
+            this.formMainStatusBarSize.Size = new System.Drawing.Size(314, 24);
             this.formMainStatusBarSize.Spring = true;
             this.formMainStatusBarSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -123,7 +118,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.formMainStatusBarScale.Name = "formMainStatusBarScale";
-            this.formMainStatusBarScale.Size = new System.Drawing.Size(333, 24);
+            this.formMainStatusBarScale.Size = new System.Drawing.Size(314, 24);
             this.formMainStatusBarScale.Spring = true;
             this.formMainStatusBarScale.Text = "Масштаб: 100%";
             this.formMainStatusBarScale.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -135,7 +130,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.formMainStatusBarVersion.Name = "formMainStatusBarVersion";
             this.formMainStatusBarVersion.Size = new System.Drawing.Size(100, 24);
-            this.formMainStatusBarVersion.Text = "Версия: 1.2.0";
+            this.formMainStatusBarVersion.Text = "Версия: 1.4.0";
             // 
             // formMainMenuStrip
             // 
@@ -161,7 +156,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStripFileSeparator2,
             this.formMainMenuStripFileExit});
             this.formMainMenuStripFile.Name = "formMainMenuStripFile";
-            this.formMainMenuStripFile.Size = new System.Drawing.Size(59, 26);
+            this.formMainMenuStripFile.Size = new System.Drawing.Size(59, 24);
             this.formMainMenuStripFile.Text = "Файл";
             // 
             // formMainMenuStripFileCreate
@@ -228,7 +223,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStripViewScale,
             this.formMainMenuStripViewStatusBar});
             this.formMainMenuStripView.Name = "formMainMenuStripView";
-            this.formMainMenuStripView.Size = new System.Drawing.Size(49, 26);
+            this.formMainMenuStripView.Size = new System.Drawing.Size(49, 24);
             this.formMainMenuStripView.Text = "Вид";
             // 
             // formMainMenuStripViewScale
@@ -281,7 +276,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStripReference.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.formMainMenuStripReferenceAbout});
             this.formMainMenuStripReference.Name = "formMainMenuStripReference";
-            this.formMainMenuStripReference.Size = new System.Drawing.Size(81, 26);
+            this.formMainMenuStripReference.Size = new System.Drawing.Size(81, 24);
             this.formMainMenuStripReference.Text = "Справка";
             // 
             // formMainMenuStripReferenceAbout
@@ -293,98 +288,18 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             // 
             // formMainPanel
             // 
-            this.formMainPanel.Controls.Add(this.formMainText);
-            this.formMainPanel.Controls.Add(this.formMainFill);
-            this.formMainPanel.Controls.Add(this.formMainGroupFigures);
             this.formMainPanel.Controls.Add(this.formMainTrackBar);
-            this.formMainPanel.Controls.Add(this.formMainMarker);
-            this.formMainPanel.Controls.Add(this.formMainBrush);
-            this.formMainPanel.Controls.Add(this.formMainFeltTipPen);
-            this.formMainPanel.Controls.Add(this.formMainPen);
-            this.formMainPanel.Controls.Add(this.formMainRubber);
             this.formMainPanel.Controls.Add(this.formMainChooseColor);
             this.formMainPanel.Controls.Add(this.formMainGroupColor);
             this.formMainPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.formMainPanel.Location = new System.Drawing.Point(0, 30);
+            this.formMainPanel.Location = new System.Drawing.Point(0, 60);
             this.formMainPanel.Name = "formMainPanel";
-            this.formMainPanel.Size = new System.Drawing.Size(782, 135);
+            this.formMainPanel.Size = new System.Drawing.Size(782, 107);
             this.formMainPanel.TabIndex = 3;
-            // 
-            // formMainText
-            // 
-            this.formMainText.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.text;
-            this.formMainText.Location = new System.Drawing.Point(394, 73);
-            this.formMainText.Name = "formMainText";
-            this.formMainText.Size = new System.Drawing.Size(50, 50);
-            this.formMainText.TabIndex = 10;
-            this.formMainText.UseVisualStyleBackColor = true;
-            this.formMainText.Click += new System.EventHandler(this.formMainText_Click);
-            // 
-            // formMainFill
-            // 
-            this.formMainFill.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.fill;
-            this.formMainFill.Location = new System.Drawing.Point(278, 75);
-            this.formMainFill.Name = "formMainFill";
-            this.formMainFill.Size = new System.Drawing.Size(50, 50);
-            this.formMainFill.TabIndex = 9;
-            this.formMainFill.UseVisualStyleBackColor = true;
-            // 
-            // formMainGroupFigures
-            // 
-            this.formMainGroupFigures.Controls.Add(this.formMainGroupFiguresLine);
-            this.formMainGroupFigures.Controls.Add(this.formMainGroupFiguresEllipse);
-            this.formMainGroupFigures.Controls.Add(this.formMainGroupFiguresTriangle);
-            this.formMainGroupFigures.Controls.Add(this.formMainGroupFiguresSquare);
-            this.formMainGroupFigures.Location = new System.Drawing.Point(12, 54);
-            this.formMainGroupFigures.Name = "formMainGroupFigures";
-            this.formMainGroupFigures.Size = new System.Drawing.Size(200, 76);
-            this.formMainGroupFigures.TabIndex = 8;
-            this.formMainGroupFigures.TabStop = false;
-            this.formMainGroupFigures.Text = "Фигуры";
-            // 
-            // formMainGroupFiguresLine
-            // 
-            this.formMainGroupFiguresLine.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.fline;
-            this.formMainGroupFiguresLine.Location = new System.Drawing.Point(144, 21);
-            this.formMainGroupFiguresLine.Name = "formMainGroupFiguresLine";
-            this.formMainGroupFiguresLine.Size = new System.Drawing.Size(40, 40);
-            this.formMainGroupFiguresLine.TabIndex = 3;
-            this.formMainGroupFiguresLine.UseVisualStyleBackColor = true;
-            this.formMainGroupFiguresLine.Click += new System.EventHandler(this.formMainGroupFiguresLine_Click);
-            // 
-            // formMainGroupFiguresEllipse
-            // 
-            this.formMainGroupFiguresEllipse.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.fellipse;
-            this.formMainGroupFiguresEllipse.Location = new System.Drawing.Point(98, 21);
-            this.formMainGroupFiguresEllipse.Name = "formMainGroupFiguresEllipse";
-            this.formMainGroupFiguresEllipse.Size = new System.Drawing.Size(40, 40);
-            this.formMainGroupFiguresEllipse.TabIndex = 2;
-            this.formMainGroupFiguresEllipse.UseVisualStyleBackColor = true;
-            this.formMainGroupFiguresEllipse.Click += new System.EventHandler(this.formMainGroupFiguresEllipse_Click);
-            // 
-            // formMainGroupFiguresTriangle
-            // 
-            this.formMainGroupFiguresTriangle.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.ftriangle;
-            this.formMainGroupFiguresTriangle.Location = new System.Drawing.Point(52, 21);
-            this.formMainGroupFiguresTriangle.Name = "formMainGroupFiguresTriangle";
-            this.formMainGroupFiguresTriangle.Size = new System.Drawing.Size(40, 40);
-            this.formMainGroupFiguresTriangle.TabIndex = 1;
-            this.formMainGroupFiguresTriangle.UseVisualStyleBackColor = true;
-            this.formMainGroupFiguresTriangle.Click += new System.EventHandler(this.formMainGroupFiguresTriangle_Click);
-            // 
-            // formMainGroupFiguresSquare
-            // 
-            this.formMainGroupFiguresSquare.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.fsquare;
-            this.formMainGroupFiguresSquare.Location = new System.Drawing.Point(6, 21);
-            this.formMainGroupFiguresSquare.Name = "formMainGroupFiguresSquare";
-            this.formMainGroupFiguresSquare.Size = new System.Drawing.Size(40, 40);
-            this.formMainGroupFiguresSquare.TabIndex = 0;
-            this.formMainGroupFiguresSquare.UseVisualStyleBackColor = true;
-            this.formMainGroupFiguresSquare.Click += new System.EventHandler(this.formMainGroupFiguresSquare_Click);
             // 
             // formMainTrackBar
             // 
-            this.formMainTrackBar.Location = new System.Drawing.Point(277, 3);
+            this.formMainTrackBar.Location = new System.Drawing.Point(3, 28);
             this.formMainTrackBar.Maximum = 5;
             this.formMainTrackBar.Minimum = 1;
             this.formMainTrackBar.Name = "formMainTrackBar";
@@ -393,66 +308,10 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainTrackBar.Value = 3;
             this.formMainTrackBar.Scroll += new System.EventHandler(this.formMainTrackBar_Scroll);
             // 
-            // formMainMarker
-            // 
-            this.formMainMarker.Location = new System.Drawing.Point(101, 23);
-            this.formMainMarker.Name = "formMainMarker";
-            this.formMainMarker.Size = new System.Drawing.Size(100, 25);
-            this.formMainMarker.TabIndex = 6;
-            this.formMainMarker.Tag = "Маркер";
-            this.formMainMarker.Text = "Маркер";
-            this.formMainMarker.UseVisualStyleBackColor = true;
-            this.formMainMarker.Click += new System.EventHandler(this.formMainSelectTool);
-            // 
-            // formMainBrush
-            // 
-            this.formMainBrush.Location = new System.Drawing.Point(3, 23);
-            this.formMainBrush.Name = "formMainBrush";
-            this.formMainBrush.Size = new System.Drawing.Size(100, 25);
-            this.formMainBrush.TabIndex = 5;
-            this.formMainBrush.Tag = "Кисточка";
-            this.formMainBrush.Text = "Кисточка";
-            this.formMainBrush.UseVisualStyleBackColor = true;
-            this.formMainBrush.Click += new System.EventHandler(this.formMainSelectTool);
-            // 
-            // formMainFeltTipPen
-            // 
-            this.formMainFeltTipPen.Location = new System.Drawing.Point(3, 0);
-            this.formMainFeltTipPen.Name = "formMainFeltTipPen";
-            this.formMainFeltTipPen.Size = new System.Drawing.Size(100, 25);
-            this.formMainFeltTipPen.TabIndex = 4;
-            this.formMainFeltTipPen.Tag = "Фломастер";
-            this.formMainFeltTipPen.Text = "Фломастер";
-            this.formMainFeltTipPen.UseVisualStyleBackColor = true;
-            this.formMainFeltTipPen.Click += new System.EventHandler(this.formMainSelectTool);
-            // 
-            // formMainPen
-            // 
-            this.formMainPen.Location = new System.Drawing.Point(101, 0);
-            this.formMainPen.Name = "formMainPen";
-            this.formMainPen.Size = new System.Drawing.Size(100, 25);
-            this.formMainPen.TabIndex = 3;
-            this.formMainPen.Tag = "Карандаш";
-            this.formMainPen.Text = "Карандаш";
-            this.formMainPen.UseVisualStyleBackColor = true;
-            this.formMainPen.Click += new System.EventHandler(this.formMainSelectTool);
-            // 
-            // formMainRubber
-            // 
-            this.formMainRubber.BackgroundImage = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.ruuber__2_;
-            this.formMainRubber.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.formMainRubber.Location = new System.Drawing.Point(334, 75);
-            this.formMainRubber.Name = "formMainRubber";
-            this.formMainRubber.Size = new System.Drawing.Size(54, 48);
-            this.formMainRubber.TabIndex = 2;
-            this.formMainRubber.Tag = "Ластик";
-            this.formMainRubber.UseVisualStyleBackColor = false;
-            this.formMainRubber.Click += new System.EventHandler(this.formMainSelectTool);
-            // 
             // formMainChooseColor
             // 
             this.formMainChooseColor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("formMainChooseColor.BackgroundImage")));
-            this.formMainChooseColor.Location = new System.Drawing.Point(394, 10);
+            this.formMainChooseColor.Location = new System.Drawing.Point(110, 28);
             this.formMainChooseColor.Name = "formMainChooseColor";
             this.formMainChooseColor.Size = new System.Drawing.Size(50, 50);
             this.formMainChooseColor.TabIndex = 1;
@@ -481,9 +340,9 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainGroupColor.Controls.Add(this.formMainGroupColorVinous);
             this.formMainGroupColor.Controls.Add(this.formMainGroupColorGray);
             this.formMainGroupColor.Controls.Add(this.formMainGroupColorBlack);
-            this.formMainGroupColor.Location = new System.Drawing.Point(462, 3);
+            this.formMainGroupColor.Location = new System.Drawing.Point(177, 3);
             this.formMainGroupColor.Name = "formMainGroupColor";
-            this.formMainGroupColor.Size = new System.Drawing.Size(320, 95);
+            this.formMainGroupColor.Size = new System.Drawing.Size(338, 101);
             this.formMainGroupColor.TabIndex = 0;
             this.formMainGroupColor.TabStop = false;
             this.formMainGroupColor.Text = "Палитра";
@@ -698,9 +557,80 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainPictureBox.Size = new System.Drawing.Size(782, 254);
             this.formMainPictureBox.TabIndex = 2;
             this.formMainPictureBox.TabStop = false;
+            this.formMainPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.formMainPictureBox_Paint);
             this.formMainPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.formMainPictureBox_MouseDown);
             this.formMainPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.formMainPictureBox_MouseMove);
             this.formMainPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.formMainPictureBox_MouseUp);
+            // 
+            // formMainMenuStripTools
+            // 
+            this.formMainMenuStripTools.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.formMainMenuStripTools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formMainMenuStripToolsRect,
+            this.formMainMenuStripToolsEllipse,
+            this.formMainMenuStripToolsLine,
+            this.formMainMenuStripToolsFill,
+            this.formMainMenuStripToolsRubber,
+            this.formMainMenuStripToolsText});
+            this.formMainMenuStripTools.Location = new System.Drawing.Point(0, 30);
+            this.formMainMenuStripTools.Name = "formMainMenuStripTools";
+            this.formMainMenuStripTools.Size = new System.Drawing.Size(782, 30);
+            this.formMainMenuStripTools.TabIndex = 4;
+            // 
+            // formMainMenuStripToolsRect
+            // 
+            this.formMainMenuStripToolsRect.AutoToolTip = true;
+            this.formMainMenuStripToolsRect.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.fsquare;
+            this.formMainMenuStripToolsRect.Name = "formMainMenuStripToolsRect";
+            this.formMainMenuStripToolsRect.Size = new System.Drawing.Size(34, 24);
+            this.formMainMenuStripToolsRect.ToolTipText = "Прямоугольник";
+            this.formMainMenuStripToolsRect.Click += new System.EventHandler(this.formMainMenuStripToolsRect_Click);
+            // 
+            // formMainMenuStripToolsEllipse
+            // 
+            this.formMainMenuStripToolsEllipse.AutoToolTip = true;
+            this.formMainMenuStripToolsEllipse.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.fellipse;
+            this.formMainMenuStripToolsEllipse.Name = "formMainMenuStripToolsEllipse";
+            this.formMainMenuStripToolsEllipse.Size = new System.Drawing.Size(34, 24);
+            this.formMainMenuStripToolsEllipse.ToolTipText = "Эллипс";
+            this.formMainMenuStripToolsEllipse.Click += new System.EventHandler(this.formMainMenuStripToolsEllipse_Click);
+            // 
+            // formMainMenuStripToolsLine
+            // 
+            this.formMainMenuStripToolsLine.AutoToolTip = true;
+            this.formMainMenuStripToolsLine.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.fline;
+            this.formMainMenuStripToolsLine.Name = "formMainMenuStripToolsLine";
+            this.formMainMenuStripToolsLine.Size = new System.Drawing.Size(34, 24);
+            this.formMainMenuStripToolsLine.ToolTipText = "Линия";
+            this.formMainMenuStripToolsLine.Click += new System.EventHandler(this.formMainMenuStripToolsLine_Click);
+            // 
+            // formMainMenuStripToolsFill
+            // 
+            this.formMainMenuStripToolsFill.AutoToolTip = true;
+            this.formMainMenuStripToolsFill.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.fill;
+            this.formMainMenuStripToolsFill.Name = "formMainMenuStripToolsFill";
+            this.formMainMenuStripToolsFill.Size = new System.Drawing.Size(34, 24);
+            this.formMainMenuStripToolsFill.ToolTipText = "Заливка";
+            this.formMainMenuStripToolsFill.Click += new System.EventHandler(this.formMainMenuStripToolsFill_Click);
+            // 
+            // formMainMenuStripToolsRubber
+            // 
+            this.formMainMenuStripToolsRubber.AutoToolTip = true;
+            this.formMainMenuStripToolsRubber.BackColor = System.Drawing.SystemColors.Control;
+            this.formMainMenuStripToolsRubber.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.ruuber__2_;
+            this.formMainMenuStripToolsRubber.Name = "formMainMenuStripToolsRubber";
+            this.formMainMenuStripToolsRubber.Size = new System.Drawing.Size(34, 24);
+            this.formMainMenuStripToolsRubber.ToolTipText = "Ластик";
+            this.formMainMenuStripToolsRubber.Click += new System.EventHandler(this.formMainMenuStripToolsRubber_Click);
+            // 
+            // formMainMenuStripToolsText
+            // 
+            this.formMainMenuStripToolsText.AutoToolTip = true;
+            this.formMainMenuStripToolsText.Image = global::KPFU_2_sem_programming_PaintPlusPlus.Properties.Resources.text;
+            this.formMainMenuStripToolsText.Name = "formMainMenuStripToolsText";
+            this.formMainMenuStripToolsText.Size = new System.Drawing.Size(34, 24);
+            this.formMainMenuStripToolsText.ToolTipText = "Текст";
+            this.formMainMenuStripToolsText.Click += new System.EventHandler(this.formMainMenuStripToolsText_Click);
             // 
             // FormMain
             // 
@@ -710,7 +640,9 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.Controls.Add(this.formMainPanel);
             this.Controls.Add(this.formMainPictureBox);
             this.Controls.Add(this.formMainStatusBar);
+            this.Controls.Add(this.formMainMenuStripTools);
             this.Controls.Add(this.formMainMenuStrip);
+            this.MainMenuStrip = this.formMainMenuStripTools;
             this.Name = "FormMain";
             this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.formMainStatusBar.ResumeLayout(false);
@@ -719,10 +651,11 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStrip.PerformLayout();
             this.formMainPanel.ResumeLayout(false);
             this.formMainPanel.PerformLayout();
-            this.formMainGroupFigures.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.formMainTrackBar)).EndInit();
             this.formMainGroupColor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.formMainPictureBox)).EndInit();
+            this.formMainMenuStripTools.ResumeLayout(false);
+            this.formMainMenuStripTools.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -732,6 +665,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
 
         private System.Windows.Forms.StatusStrip formMainStatusBar;
         private System.Windows.Forms.MenuStrip formMainMenuStrip;
+        private System.Windows.Forms.MenuStrip formMainMenuStripTools;
         private System.Windows.Forms.ToolStripStatusLabel formMainStatusBarVersion;
         private System.Windows.Forms.ToolStripStatusLabel formMainStatusBarSize;
         private System.Windows.Forms.ToolStripMenuItem formMainMenuStripFile;
@@ -768,11 +702,6 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         private System.Windows.Forms.ToolStripMenuItem formMainMenuStripFilePrint;
         private System.Windows.Forms.ToolStripSeparator formMainMenuStripFileSeparator2;
         private System.Windows.Forms.ToolStripMenuItem formMainMenuStripFileExit;
-        private System.Windows.Forms.Button formMainRubber;
-        private System.Windows.Forms.Button formMainMarker;
-        private System.Windows.Forms.Button formMainBrush;
-        private System.Windows.Forms.Button formMainFeltTipPen;
-        private System.Windows.Forms.Button formMainPen;
         private System.Windows.Forms.TrackBar formMainTrackBar;
         private System.Windows.Forms.ToolStripMenuItem formMainMenuStripView;
         private System.Windows.Forms.ToolStripMenuItem formMainMenuStripReference;
@@ -782,14 +711,13 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         private System.Windows.Forms.ToolStripMenuItem formMainMenuStripViewScaleDown;
         private System.Windows.Forms.ToolStripMenuItem formMainMenuStripViewScaleRecover;
         private System.Windows.Forms.ToolStripMenuItem formMainMenuStripViewStatusBar;
-        private System.Windows.Forms.GroupBox formMainGroupFigures;
-        private System.Windows.Forms.Button formMainGroupFiguresSquare;
-        private System.Windows.Forms.Button formMainGroupFiguresLine;
-        private System.Windows.Forms.Button formMainGroupFiguresEllipse;
-        private System.Windows.Forms.Button formMainGroupFiguresTriangle;
-        private System.Windows.Forms.Button formMainFill;
-        private System.Windows.Forms.Button formMainText;
         private System.Windows.Forms.ToolStripStatusLabel formMainStatusBarScale;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripToolsFill;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripToolsRect;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripToolsEllipse;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripToolsLine;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripToolsRubber;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripToolsText;
     }
 }
 

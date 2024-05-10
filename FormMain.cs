@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Drawing.Printing;
-using System.Windows.Forms;
-using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 
 namespace KPFU_2_sem_programming_PaintPlusPlus {
     public partial class FormMain : Form {
@@ -21,53 +21,54 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         public const string pathIconRed = "Resources/csharp_red.ico";
 
         private bool mouseDown = false;
-        private Point mouseDownPoint = Point.Empty;
-        private Point mousePoint = Point.Empty;
 
-        private byte figure = 0; // see documentation
-        private bool isPaintingFigure = false;
-        private bool isPrintingText = false;
         private string printingText = string.Empty;
         private byte printingTextSize = 0;
         private Point paintingFigureFirstPoint;
         private Point paintingFigureSecondPoint;
 
-        private ArrayPoints arrayPoints = new ArrayPoints(2);
-
-        private List<object> allObjects = new List<object>();
+        private Points points = new Points(2);
 
         private int windowSizeX = Screen.PrimaryScreen.Bounds.Width;
         private int windowSizeY = Screen.PrimaryScreen.Bounds.Height;
 
-        private Bitmap map;
+        private Bitmap mapDrawing;
+        private Bitmap mapSaved;
         private Graphics graphics;
         private Pen pen;
 
         public FormMain() {
             InitializeComponent();
 
+            this.DoubleBuffered = true;
+
+            mapDrawing = new Bitmap(formMainPictureBox.Width, formMainPictureBox.Height);
+            mapSaved = new Bitmap(formMainPictureBox.Width, formMainPictureBox.Height);
+            graphics = Graphics.FromImage(mapDrawing);
+            graphics.SmoothingMode = SmoothingMode.HighQuality;
+            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            formMainPictureBox.Image = mapDrawing;
+
             ofd.Filter = "Bitmap file|*.bmp|PNG file|.png|JPG file|.jpg|TIFF file|.tiff|GIF file|.gif|Any format|*.*";
             sfd.Filter = "Bitmap file|*.bmp|PNG file|.png|JPG file|.jpg|TIFF file|.tiff|GIF file|.gif|Any format|*.*";
 
-            map = new Bitmap(windowSizeX, windowSizeY);
-            pen = createTool("Карандаш");
+            pen = createTool(Color.Black);
 
-            setSize();
-            resizeForm();
+            updateScreen();
             changeIcon();
             changeTitle();
             updateStatusBar();
-            resetPaintingFigure();
-            resetPrintingText();
         }
 
-        private void resizeForm() {
-            formMainPictureBox.Width = this.Width - 30;
-            formMainPictureBox.Height = this.Height - 120;
-
-            updateStatusBar();
+        private void updateScreen() {
+            mapDrawing = new Bitmap(windowSizeX, windowSizeY);
+            mapSaved = new Bitmap(windowSizeX, windowSizeY);
+            graphics = Graphics.FromImage(mapDrawing);
+            graphics.Clear(Color.White);
+            graphics.SmoothingMode = SmoothingMode.HighQuality;
+            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
         }
-
+        
         private void changeIcon() {
             if (fileIsSaved == true) {
                 this.Icon = new Icon(pathIconBlue);
@@ -101,132 +102,111 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             formMainStatusBar.Refresh();
         }
 
-        private Pen createTool(string what) {
-            Pen p = new Pen(Color.White, 1);
-            p.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
-            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+        private Pen createTool(Color color) {
+            Pen p = new Pen(color, formMainTrackBar.Value);
 
-            switch (what) {
-                case "Карандаш":
-                p.Color = Color.Black;
-                p.Width = 3;
-                break;
-
-                case "Маркер":
-                p.Color = Color.DarkCyan;
-                p.Width = 3;
-                break;
-
-                case "Фломастер":
-                p.Color = Color.Gainsboro;
-                p.Width = 3;
-                break;
-
-                case "Кисточка":
-                p.Color = Color.Yellow;
-                p.Width = 3;
-                break;
-
-                case "Ластик":
-                p.Color = Color.White;
-                p.Width = 3;
-                break;
-            }
-            figure = 0;
+            p.Brush = Brushes.Black;
+            p.StartCap = LineCap.Round;
+            p.EndCap = LineCap.Round;
+            p.Alignment = PenAlignment.Center;
+            p.DashStyle = DashStyle.Custom;
+            p.LineJoin = LineJoin.Round;
 
             return p;
         }
-
+        
         private void formMainPictureBox_MouseDown(object sender, MouseEventArgs e) {
+            paintingFigureFirstPoint = e.Location;
             mouseDown = true;
-            mousePoint = mouseDownPoint = e.Location;
 
-            if (isPaintingFigure == true) {
-                paintingFigureFirstPoint = e.Location;
-            } else if (isPrintingText == true) {
+            if (formMainMenuStripToolsText.Checked == true) {
                 graphics.DrawString(printingText, new Font("Arial", printingTextSize), pen.Brush, e.Location.X, e.Location.Y);
-                Text text = new Text(printingText, new Font("Arial", printingTextSize), pen.Brush, e.Location.X, e.Location.Y);
-                allObjects.Add(text);
                 printingText = string.Empty;
                 printingTextSize = 0;
-            }
 
-            changeIcon();
-            changeTitle();
+                formMainMenuStripToolsText.Checked = false;
+                formMainPictureBox.Invalidate();
+            }
         }
 
         private void formMainPictureBox_MouseMove(object sender, MouseEventArgs e) {
-            mousePoint = e.Location;
+            paintingFigureSecondPoint = e.Location;
 
             if (mouseDown == false) {
                 return;
             }
 
-            if (isPaintingFigure == true) {
+            if (formMainMenuStripToolsRect.Checked == true || formMainMenuStripToolsEllipse.Checked == true) {
+                graphics.Clear(Color.White);
+                graphics.DrawImage(mapSaved, Point.Empty);
+
+                Rectangle rect = RectFrom2Points(paintingFigureFirstPoint, paintingFigureSecondPoint);
+
+                if (formMainMenuStripToolsRect.Checked == true) {
+                    graphics.DrawRectangle(pen, rect);
+
+                    if (formMainMenuStripToolsFill.Checked == true) {
+                        graphics.FillRectangle(pen.Brush, rect);
+                    }
+                } else {
+                    graphics.DrawEllipse(pen, rect);
+
+                    if (formMainMenuStripToolsFill.Checked == true) {
+                        graphics.FillEllipse(pen.Brush, rect);
+                    }
+                }
+
                 formMainPictureBox.Invalidate();
-                //formMainPictureBox.Invalidate();
-                Rectangle rect = RectFrom2Points(paintingFigureFirstPoint, e.Location);
-                graphics.DrawRectangle(pen, rect);
-                formMainPictureBox.Image = map;
-                //formMainPictureBox.Invalidate();
-            } else if (isPrintingText == true) {
+            } else if (formMainMenuStripToolsLine.Checked == true) {
+                graphics.Clear(Color.White);
+                graphics.DrawImage(mapSaved, Point.Empty);
 
+                graphics.DrawLine(pen, paintingFigureFirstPoint, paintingFigureSecondPoint);
+
+                formMainPictureBox.Invalidate();
+            } else if (formMainMenuStripToolsRubber.Checked == true) {
+                graphics.Clear(Color.White);
+                graphics.DrawImage(mapSaved, Point.Empty);
+
+                Rectangle rect = RectFromPoint(paintingFigureSecondPoint, 30);
+
+                graphics.FillEllipse(Brushes.White, rect);
+
+                formMainPictureBox.Invalidate();
             } else {
-                arrayPoints.setPoint(e.X, e.Y);
+                points.setPoint(e.X, e.Y);
 
-                if (arrayPoints.getCountPoints() >= 2) {
-                    graphics.DrawLines(pen, arrayPoints.getPoints());
-                    Point[] array = arrayPoints.getPoints();
-                    allObjects.Add(array);
-                    formMainPictureBox.Image = map;
-                    arrayPoints.setPoint(e.X, e.Y);
+                if (points.getCountPoints() >= 2) {
+                    graphics.DrawLines(pen, points.getPoints());
+                    formMainPictureBox.Image = mapDrawing;
+                    points.setPoint(e.X, e.Y);
                 }
             }
-
-            changeIcon();
-            changeTitle();
         }
 
         private void formMainPictureBox_MouseUp(object sender, MouseEventArgs e) {
+            mapSaved = new Bitmap(mapDrawing);
             mouseDown = false;
-            arrayPoints.resetPoints();
-
-            if (isPaintingFigure == true) {
-                paintingFigureSecondPoint = e.Location;
-                Rectangle rect = RectFrom2Points(paintingFigureFirstPoint, paintingFigureSecondPoint);
-                allObjects.Add(rect);
-                graphics.DrawRectangle(pen, rect);
-                formMainPictureBox.Image = map;
-                formMainPictureBox.Invalidate();
-
-                resetPaintingFigure();
-            } else if (isPrintingText == true) {
-                isPrintingText = false;
-            }
-
-            this.formMainPictureBox.Cursor = Cursors.Default;
-
             fileIsSaved = false;
-
-            changeIcon();
-            changeTitle();
+            points.resetPoints();
+            this.formMainPictureBox.Cursor = Cursors.Default;
         }
 
-        private void setSize() {
-            Rectangle rectangle = Screen.PrimaryScreen.Bounds;
-            map = new Bitmap(rectangle.Width, rectangle.Height);
-            graphics = Graphics.FromImage(map);
+        private void formMainPictureBox_Paint(object sender, PaintEventArgs e) {
+            e.Graphics.DrawImage(mapSaved, Point.Empty);
+            e.Graphics.DrawImage(mapDrawing, Point.Empty);
+        }
 
-            pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-            pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+        private void FormMain_Resize(object sender, EventArgs e) {
+            formMainPictureBox.Location = new Point(0, formMainMenuStrip.Location.Y + formMainMenuStripTools.Location.Y + formMainPanel.Location.Y);
+            formMainPictureBox.Width = this.Width - 30;
+            formMainPictureBox.Height = this.Height - 120;
+
+            updateStatusBar();
         }
 
         private void formMainGroupColorSetColor(object sender, EventArgs e) {
             pen.Color = ((Button) sender).BackColor;
-        }
-
-        private void formMainSelectTool(object sender, EventArgs e) {
-            pen = createTool(((Button) sender).Tag.ToString());
         }
 
         private void newFile() {
@@ -234,8 +214,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             fileIsNew = true;
             fileIsSaved = true;
 
-            graphics.Clear(Color.White);
-
+            updateScreen();
             changeIcon();
             changeTitle();
         }
@@ -331,13 +310,14 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             if (dialogResult == DialogResult.Yes) {
                 if (fileIsNew == true) {
                     if (sfd.ShowDialog() == DialogResult.OK) {
-
-                        return saveFile();
+                        saveFile();
+                        return true;
                     } else {
                         return false;
                     }
                 } else {
-                    return saveFile();
+                    saveFile();
+                    return true;
                 }
             } else if (dialogResult == DialogResult.No) {
                 this.Close();
@@ -349,7 +329,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             }
         }
 
-        private bool saveFile() {
+        private void saveFile() {
             ImageFormat imageFormat;
             if (sfd.FileName.EndsWith(".bmp")) {
                 imageFormat = ImageFormat.Bmp;
@@ -367,17 +347,10 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
 
             formMainPictureBox.Image.Save(sfd.FileName, imageFormat);
 
-
             fileName = sfd.FileName;
             fileIsSaved = true;
             changeTitle();
             changeIcon();
-
-            return true;
-        }
-
-        private void FormMain_Resize(object sender, EventArgs e) {
-            resizeForm();
         }
 
         private void formMainTrackBar_Scroll(object sender, EventArgs e) {
@@ -420,32 +393,12 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         }
 
         private void changeZoom(string value) {
-
             updateStatusBar();
         }
 
-        private void formMainGroupFiguresSquare_Click(object sender, EventArgs e) {
-            isPaintingFigure = true;
-            figure = 1;
-            this.formMainPictureBox.Cursor = Cursors.Cross;
-        }
-
-        private void formMainGroupFiguresTriangle_Click(object sender, EventArgs e) {
-            isPaintingFigure = true;
-            figure = 2;
-            this.formMainPictureBox.Cursor = Cursors.Cross;
-        }
-
-        private void formMainGroupFiguresEllipse_Click(object sender, EventArgs e) {
-            isPaintingFigure = true;
-            figure = 3;
-            this.formMainPictureBox.Cursor = Cursors.Cross;
-        }
-
-        private void formMainGroupFiguresLine_Click(object sender, EventArgs e) {
-            isPaintingFigure = true;
-            figure = 4;
-            this.formMainPictureBox.Cursor = Cursors.Cross;
+        private Rectangle RectFromPoint(Point p, int radius) {
+            Rectangle rect = new Rectangle(new Point(p.X - radius, p.Y - radius), new Size(radius * 2, radius * 2));
+            return rect;
         }
 
         private Rectangle RectFrom2Points(Point start, Point end) {
@@ -458,47 +411,73 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             return rect;
         }
 
-        private void resetPaintingFigure() {
-            figure = 0;
-            isPaintingFigure = false;
-            paintingFigureFirstPoint = Point.Empty;
-            paintingFigureSecondPoint = Point.Empty;
+        private void formMainMenuStripToolsRect_Click(object sender, EventArgs e) {
+            if (formMainMenuStripToolsRect.Checked == true) {
+                formMainMenuStripToolsRect.Checked = false;
+            } else {
+                formMainMenuStripToolsSetOFF();
+                formMainMenuStripToolsRect.Checked = true;
+            }
         }
 
-        private void resetPrintingText() {
-            isPrintingText = false;
-            printingText = string.Empty;
-            printingTextSize = 0;
+        private void formMainMenuStripToolsEllipse_Click(object sender, EventArgs e) {
+            if (formMainMenuStripToolsEllipse.Checked == true) {
+                formMainMenuStripToolsEllipse.Checked = false;
+            } else {
+                formMainMenuStripToolsSetOFF();
+                formMainMenuStripToolsEllipse.Checked = true;
+            }
         }
 
-        private void formMainText_Click(object sender, EventArgs e) {
-            if (isPaintingFigure == false) {
+        private void formMainMenuStripToolsLine_Click(object sender, EventArgs e) {
+            if (formMainMenuStripToolsLine.Checked == true) {
+                formMainMenuStripToolsLine.Checked = false;
+            } else {
+                formMainMenuStripToolsSetOFF();
+                formMainMenuStripToolsLine.Checked = true;
+            }
+        }
+
+        private void formMainMenuStripToolsFill_Click(object sender, EventArgs e) {
+            if (formMainMenuStripToolsFill.Checked == true) {
+                formMainMenuStripToolsFill.Checked = false;
+            } else {
+                formMainMenuStripToolsFill.Checked = true;
+            }
+        }
+
+        private void formMainMenuStripToolsRubber_Click(object sender, EventArgs e) {
+            if (formMainMenuStripToolsRubber.Checked == true) {
+                formMainMenuStripToolsRubber.Checked = false;
+            } else {
+                formMainMenuStripToolsSetOFF();
+                formMainMenuStripToolsRubber.Checked = true;
+            }
+        }
+
+        private void formMainMenuStripToolsText_Click(object sender, EventArgs e) {
+            if (formMainMenuStripToolsText.Checked == true) {
+                formMainMenuStripToolsText.Checked = false;
+            } else {
+                formMainMenuStripToolsSetOFF();
+                formMainMenuStripToolsText.Checked = true;
+
                 InputText inputText = new InputText();
 
                 if (inputText.ShowDialog() == DialogResult.OK) {
                     printingText = inputText.formInputTextTextBox.Text;
                     printingTextSize = Convert.ToByte(inputText.formInputTextTextSize.Text);
-                    isPrintingText = true;
+
                     this.formMainPictureBox.Cursor = Cursors.Cross;
                 } else {
-                    isPrintingText = false;
+                    formMainMenuStripToolsText.Checked = false;
                 }
             }
         }
 
-        private void drawAllObjects() {
-
-            foreach (object obj in allObjects) {
-                if (obj is Rectangle) {
-                    Rectangle rect = (Rectangle) obj;
-                    graphics.DrawRectangle(pen, rect);
-                } else if (obj is Text) {
-                    Text text = (Text) obj;
-                    
-                    //graphics.DrawString(pen, text);
-                } else if (obj is Point) {
-                    //graphics.DrawLines(pen, array);
-                }
+        private void formMainMenuStripToolsSetOFF() {
+            foreach (ToolStripMenuItem item in formMainMenuStripTools.Items) {
+                item.Checked = false;
             }
         }
     }
