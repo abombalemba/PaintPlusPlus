@@ -130,7 +130,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.formMainStatusBarVersion.Name = "formMainStatusBarVersion";
             this.formMainStatusBarVersion.Size = new System.Drawing.Size(100, 24);
-            this.formMainStatusBarVersion.Text = "Версия: 1.4.0";
+            this.formMainStatusBarVersion.Text = "Версия: 1.4.1";
             // 
             // formMainMenuStrip
             // 

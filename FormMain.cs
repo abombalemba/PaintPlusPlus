@@ -150,7 +150,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
                     }
                 } else {
                     graphics.DrawEllipse(pen, rect);
-
+                    
                     if (formMainMenuStripToolsFill.Checked == true) {
                         graphics.FillEllipse(pen.Brush, rect);
                     }
@@ -165,9 +165,6 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
 
                 formMainPictureBox.Invalidate();
             } else if (formMainMenuStripToolsRubber.Checked == true) {
-                graphics.Clear(Color.White);
-                graphics.DrawImage(mapSaved, Point.Empty);
-
                 Rectangle rect = RectFromPoint(paintingFigureSecondPoint, 30);
 
                 graphics.FillEllipse(Brushes.White, rect);
@@ -175,12 +172,14 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
                 formMainPictureBox.Invalidate();
             } else {
                 points.setPoint(e.X, e.Y);
-
-                if (points.getCountPoints() >= 2) {
+                
+                if (points.getCountPoints() == 2) {
                     graphics.DrawLines(pen, points.getPoints());
                     formMainPictureBox.Image = mapDrawing;
                     points.setPoint(e.X, e.Y);
                 }
+
+                formMainPictureBox.Invalidate();
             }
         }
 
@@ -190,6 +189,9 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             fileIsSaved = false;
             points.resetPoints();
             this.formMainPictureBox.Cursor = Cursors.Default;
+
+            changeIcon();
+            changeTitle();
         }
 
         private void formMainPictureBox_Paint(object sender, PaintEventArgs e) {
@@ -241,6 +243,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             if (ofd.ShowDialog() == DialogResult.OK) {
                 fileName = ofd.FileName;
 
+                updateScreen();
                 formMainPictureBox.Image = new Bitmap(ofd.FileName);
 
                 fileIsNew = false;
@@ -249,8 +252,8 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
                 return;
             }
 
-            changeTitle();
             changeIcon();
+            changeTitle();
         }
 
         private void formMainFileSave_Click(object sender, EventArgs e) {
@@ -349,8 +352,9 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
 
             fileName = sfd.FileName;
             fileIsSaved = true;
-            changeTitle();
+
             changeIcon();
+            changeTitle();
         }
 
         private void formMainTrackBar_Scroll(object sender, EventArgs e) {
