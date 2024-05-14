@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
@@ -36,6 +37,8 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         private Bitmap mapSaved;
         private Graphics graphics;
         private Pen pen;
+
+        private Image clipboard;
 
         public FormMain() {
             InitializeComponent();
@@ -116,6 +119,10 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         }
         
         private void formMainPictureBox_MouseDown(object sender, MouseEventArgs e) {
+            if (e.Button != MouseButtons.Left) {
+                return;
+            }
+
             paintingFigureFirstPoint = e.Location;
             mouseDown = true;
 
@@ -130,6 +137,10 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         }
 
         private void formMainPictureBox_MouseMove(object sender, MouseEventArgs e) {
+            if (e.Button != MouseButtons.Left) {
+                return;
+            }
+
             paintingFigureSecondPoint = e.Location;
 
             if (mouseDown == false) {
@@ -181,9 +192,18 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
 
                 formMainPictureBox.Invalidate();
             }
+
+            fileIsSaved = false;
+
+            changeIcon();
+            changeTitle();
         }
 
         private void formMainPictureBox_MouseUp(object sender, MouseEventArgs e) {
+            if (e.Button != MouseButtons.Left) {
+                return;
+            }
+
             mapSaved = new Bitmap(mapDrawing);
             mouseDown = false;
             fileIsSaved = false;
@@ -483,6 +503,74 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             foreach (ToolStripMenuItem item in formMainMenuStripTools.Items) {
                 item.Checked = false;
             }
+        }
+
+        private void formMainMenuStripCorrectionCut_Click(object sender, EventArgs e) {
+            CtrlX();
+        }
+
+        private void formMainMenuStripCorrectionCopy_Click(object sender, EventArgs e) {
+            CtrlC();
+        }
+        
+        private void formMainMenuStripCorrectionPaste_Click(object sender, EventArgs e) {
+            CtrlV();
+        }
+
+        private void formMainMenuStripCorrectionDelete_Click(object sender, EventArgs e) {
+            CtrlDelete();
+        }
+
+        private void formMainContextMenuCut_Click(object sender, EventArgs e) {
+            CtrlX();
+        }
+
+        private void formMainContextMenuCopy_Click(object sender, EventArgs e) {
+            CtrlC();
+        }
+
+        private void formMainContextMenuPaste_Click(object sender, EventArgs e) {
+            CtrlV();
+        }
+
+        private void formMainContextMenuDelete_Click(object sender, EventArgs e) {
+            CtrlDelete();
+        }
+
+        private void CtrlX() {
+            if (formMainPictureBox.Image != null) {
+                clipboard = new Bitmap(formMainPictureBox.Image);
+
+                mapDrawing = new Bitmap(formMainPictureBox.Width, formMainPictureBox.Height);
+                mapSaved = new Bitmap(mapDrawing);
+                graphics = Graphics.FromImage(mapDrawing);
+                formMainPictureBox.Image = mapDrawing;
+                formMainPictureBox.Invalidate();
+            }
+        }
+
+        private void CtrlC() {
+            if (formMainPictureBox.Image != null) {
+                clipboard = new Bitmap(formMainPictureBox.Image);
+            }
+        }
+
+        private void CtrlV() {
+            if (clipboard != null) {
+                mapDrawing = new Bitmap(clipboard);
+                mapSaved = new Bitmap(mapDrawing);
+                graphics = Graphics.FromImage(mapDrawing);
+                formMainPictureBox.Image = mapDrawing;
+                formMainPictureBox.Invalidate();
+            }
+        }
+
+        private void CtrlDelete() {
+            mapDrawing = new Bitmap(formMainPictureBox.Width, formMainPictureBox.Height);
+            mapSaved = new Bitmap(mapDrawing);
+            graphics = Graphics.FromImage(mapDrawing);
+            formMainPictureBox.Image = mapDrawing;
+            formMainPictureBox.Invalidate();
         }
     }
 }

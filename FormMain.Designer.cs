@@ -24,6 +24,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         /// содержимое этого метода с помощью редактора кода.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.formMainStatusBar = new System.Windows.Forms.StatusStrip();
             this.formMainStatusBarSize = new System.Windows.Forms.ToolStripStatusLabel();
@@ -39,6 +40,11 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStripFilePrint = new System.Windows.Forms.ToolStripMenuItem();
             this.formMainMenuStripFileSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.formMainMenuStripFileExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.правкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripCorrectionCut = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripCorrectionCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripCorrectionPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainMenuStripCorrectionDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.formMainMenuStripView = new System.Windows.Forms.ToolStripMenuItem();
             this.formMainMenuStripViewScale = new System.Windows.Forms.ToolStripMenuItem();
             this.formMainMenuStripViewScaleUp = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,6 +86,11 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStripToolsFill = new System.Windows.Forms.ToolStripMenuItem();
             this.formMainMenuStripToolsRubber = new System.Windows.Forms.ToolStripMenuItem();
             this.formMainMenuStripToolsText = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.formMainContextMenuCut = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainContextMenuCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainContextMenuPaste = new System.Windows.Forms.ToolStripMenuItem();
+            this.formMainContextMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.formMainStatusBar.SuspendLayout();
             this.formMainMenuStrip.SuspendLayout();
             this.formMainPanel.SuspendLayout();
@@ -87,6 +98,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainGroupColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.formMainPictureBox)).BeginInit();
             this.formMainMenuStripTools.SuspendLayout();
+            this.formMainContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // formMainStatusBar
@@ -108,7 +120,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.formMainStatusBarSize.Name = "formMainStatusBarSize";
-            this.formMainStatusBarSize.Size = new System.Drawing.Size(314, 24);
+            this.formMainStatusBarSize.Size = new System.Drawing.Size(333, 24);
             this.formMainStatusBarSize.Spring = true;
             this.formMainStatusBarSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -118,7 +130,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.formMainStatusBarScale.Name = "formMainStatusBarScale";
-            this.formMainStatusBarScale.Size = new System.Drawing.Size(314, 24);
+            this.formMainStatusBarScale.Size = new System.Drawing.Size(333, 24);
             this.formMainStatusBarScale.Spring = true;
             this.formMainStatusBarScale.Text = "Масштаб: 100%";
             this.formMainStatusBarScale.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -130,18 +142,19 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.formMainStatusBarVersion.Name = "formMainStatusBarVersion";
             this.formMainStatusBarVersion.Size = new System.Drawing.Size(100, 24);
-            this.formMainStatusBarVersion.Text = "Версия: 1.4.1";
+            this.formMainStatusBarVersion.Text = "Версия: 1.4.2";
             // 
             // formMainMenuStrip
             // 
             this.formMainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.formMainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.formMainMenuStripFile,
+            this.правкаToolStripMenuItem,
             this.formMainMenuStripView,
             this.formMainMenuStripReference});
             this.formMainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.formMainMenuStrip.Name = "formMainMenuStrip";
-            this.formMainMenuStrip.Size = new System.Drawing.Size(782, 30);
+            this.formMainMenuStrip.Size = new System.Drawing.Size(782, 28);
             this.formMainMenuStrip.TabIndex = 1;
             // 
             // formMainMenuStripFile
@@ -216,6 +229,49 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStripFileExit.Size = new System.Drawing.Size(309, 26);
             this.formMainMenuStripFileExit.Text = "Выход";
             this.formMainMenuStripFileExit.Click += new System.EventHandler(this.formMainFileExit_Click);
+            // 
+            // правкаToolStripMenuItem
+            // 
+            this.правкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formMainMenuStripCorrectionCut,
+            this.formMainMenuStripCorrectionCopy,
+            this.formMainMenuStripCorrectionPaste,
+            this.formMainMenuStripCorrectionDelete});
+            this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
+            this.правкаToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.правкаToolStripMenuItem.Text = "Правка";
+            // 
+            // formMainMenuStripCorrectionCut
+            // 
+            this.formMainMenuStripCorrectionCut.Name = "formMainMenuStripCorrectionCut";
+            this.formMainMenuStripCorrectionCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.formMainMenuStripCorrectionCut.Size = new System.Drawing.Size(237, 26);
+            this.formMainMenuStripCorrectionCut.Text = "Вырезать";
+            this.formMainMenuStripCorrectionCut.Click += new System.EventHandler(this.formMainMenuStripCorrectionCut_Click);
+            // 
+            // formMainMenuStripCorrectionCopy
+            // 
+            this.formMainMenuStripCorrectionCopy.Name = "formMainMenuStripCorrectionCopy";
+            this.formMainMenuStripCorrectionCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.formMainMenuStripCorrectionCopy.Size = new System.Drawing.Size(237, 26);
+            this.formMainMenuStripCorrectionCopy.Text = "Копировать";
+            this.formMainMenuStripCorrectionCopy.Click += new System.EventHandler(this.formMainMenuStripCorrectionCopy_Click);
+            // 
+            // formMainMenuStripCorrectionPaste
+            // 
+            this.formMainMenuStripCorrectionPaste.Name = "formMainMenuStripCorrectionPaste";
+            this.formMainMenuStripCorrectionPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.formMainMenuStripCorrectionPaste.Size = new System.Drawing.Size(237, 26);
+            this.formMainMenuStripCorrectionPaste.Text = "Вставить";
+            this.formMainMenuStripCorrectionPaste.Click += new System.EventHandler(this.formMainMenuStripCorrectionPaste_Click);
+            // 
+            // formMainMenuStripCorrectionDelete
+            // 
+            this.formMainMenuStripCorrectionDelete.Name = "formMainMenuStripCorrectionDelete";
+            this.formMainMenuStripCorrectionDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.formMainMenuStripCorrectionDelete.Size = new System.Drawing.Size(237, 26);
+            this.formMainMenuStripCorrectionDelete.Text = "Удалить";
+            this.formMainMenuStripCorrectionDelete.Click += new System.EventHandler(this.formMainMenuStripCorrectionDelete_Click);
             // 
             // formMainMenuStripView
             // 
@@ -292,7 +348,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainPanel.Controls.Add(this.formMainChooseColor);
             this.formMainPanel.Controls.Add(this.formMainGroupColor);
             this.formMainPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.formMainPanel.Location = new System.Drawing.Point(0, 60);
+            this.formMainPanel.Location = new System.Drawing.Point(0, 56);
             this.formMainPanel.Name = "formMainPanel";
             this.formMainPanel.Size = new System.Drawing.Size(782, 107);
             this.formMainPanel.TabIndex = 3;
@@ -550,6 +606,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             // formMainPictureBox
             // 
             this.formMainPictureBox.BackColor = System.Drawing.Color.White;
+            this.formMainPictureBox.ContextMenuStrip = this.formMainContextMenu;
             this.formMainPictureBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.formMainPictureBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.formMainPictureBox.Location = new System.Drawing.Point(0, 169);
@@ -572,9 +629,9 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStripToolsFill,
             this.formMainMenuStripToolsRubber,
             this.formMainMenuStripToolsText});
-            this.formMainMenuStripTools.Location = new System.Drawing.Point(0, 30);
+            this.formMainMenuStripTools.Location = new System.Drawing.Point(0, 28);
             this.formMainMenuStripTools.Name = "formMainMenuStripTools";
-            this.formMainMenuStripTools.Size = new System.Drawing.Size(782, 30);
+            this.formMainMenuStripTools.Size = new System.Drawing.Size(782, 28);
             this.formMainMenuStripTools.TabIndex = 4;
             // 
             // formMainMenuStripToolsRect
@@ -632,6 +689,50 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStripToolsText.ToolTipText = "Текст";
             this.formMainMenuStripToolsText.Click += new System.EventHandler(this.formMainMenuStripToolsText_Click);
             // 
+            // formMainContextMenu
+            // 
+            this.formMainContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.formMainContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formMainContextMenuCut,
+            this.formMainContextMenuCopy,
+            this.formMainContextMenuPaste,
+            this.formMainContextMenuDelete});
+            this.formMainContextMenu.Name = "formMainContextMenu";
+            this.formMainContextMenu.Size = new System.Drawing.Size(224, 100);
+            this.formMainContextMenu.Text = "Правка";
+            // 
+            // formMainContextMenuCut
+            // 
+            this.formMainContextMenuCut.Name = "formMainContextMenuCut";
+            this.formMainContextMenuCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.formMainContextMenuCut.Size = new System.Drawing.Size(223, 24);
+            this.formMainContextMenuCut.Text = "Вырезать";
+            this.formMainContextMenuCut.Click += new System.EventHandler(this.formMainContextMenuCut_Click);
+            // 
+            // formMainContextMenuCopy
+            // 
+            this.formMainContextMenuCopy.Name = "formMainContextMenuCopy";
+            this.formMainContextMenuCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.formMainContextMenuCopy.Size = new System.Drawing.Size(223, 24);
+            this.formMainContextMenuCopy.Text = "Копировать";
+            this.formMainContextMenuCopy.Click += new System.EventHandler(this.formMainContextMenuCopy_Click);
+            // 
+            // formMainContextMenuPaste
+            // 
+            this.formMainContextMenuPaste.Name = "formMainContextMenuPaste";
+            this.formMainContextMenuPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.formMainContextMenuPaste.Size = new System.Drawing.Size(223, 24);
+            this.formMainContextMenuPaste.Text = "Вставить";
+            this.formMainContextMenuPaste.Click += new System.EventHandler(this.formMainContextMenuPaste_Click);
+            // 
+            // formMainContextMenuDelete
+            // 
+            this.formMainContextMenuDelete.Name = "formMainContextMenuDelete";
+            this.formMainContextMenuDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.formMainContextMenuDelete.Size = new System.Drawing.Size(223, 24);
+            this.formMainContextMenuDelete.Text = "Удалить";
+            this.formMainContextMenuDelete.Click += new System.EventHandler(this.formMainContextMenuDelete_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -656,6 +757,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             ((System.ComponentModel.ISupportInitialize)(this.formMainPictureBox)).EndInit();
             this.formMainMenuStripTools.ResumeLayout(false);
             this.formMainMenuStripTools.PerformLayout();
+            this.formMainContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -718,6 +820,16 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         private System.Windows.Forms.ToolStripMenuItem formMainMenuStripToolsLine;
         private System.Windows.Forms.ToolStripMenuItem formMainMenuStripToolsRubber;
         private System.Windows.Forms.ToolStripMenuItem formMainMenuStripToolsText;
+        private System.Windows.Forms.ToolStripMenuItem правкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripCorrectionCut;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripCorrectionCopy;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripCorrectionPaste;
+        private System.Windows.Forms.ToolStripMenuItem formMainMenuStripCorrectionDelete;
+        private System.Windows.Forms.ContextMenuStrip formMainContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem formMainContextMenuCut;
+        private System.Windows.Forms.ToolStripMenuItem formMainContextMenuCopy;
+        private System.Windows.Forms.ToolStripMenuItem formMainContextMenuPaste;
+        private System.Windows.Forms.ToolStripMenuItem formMainContextMenuDelete;
     }
 }
 
