@@ -142,7 +142,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.formMainStatusBarVersion.Name = "formMainStatusBarVersion";
             this.formMainStatusBarVersion.Size = new System.Drawing.Size(100, 24);
-            this.formMainStatusBarVersion.Text = "Версия: 1.4.2";
+            this.formMainStatusBarVersion.Text = "Версия: 1.4.3";
             // 
             // formMainMenuStrip
             // 
@@ -154,7 +154,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStripReference});
             this.formMainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.formMainMenuStrip.Name = "formMainMenuStrip";
-            this.formMainMenuStrip.Size = new System.Drawing.Size(782, 28);
+            this.formMainMenuStrip.Size = new System.Drawing.Size(782, 30);
             this.formMainMenuStrip.TabIndex = 1;
             // 
             // formMainMenuStripFile
@@ -348,7 +348,7 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainPanel.Controls.Add(this.formMainChooseColor);
             this.formMainPanel.Controls.Add(this.formMainGroupColor);
             this.formMainPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.formMainPanel.Location = new System.Drawing.Point(0, 56);
+            this.formMainPanel.Location = new System.Drawing.Point(0, 60);
             this.formMainPanel.Name = "formMainPanel";
             this.formMainPanel.Size = new System.Drawing.Size(782, 107);
             this.formMainPanel.TabIndex = 3;
@@ -629,9 +629,9 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             this.formMainMenuStripToolsFill,
             this.formMainMenuStripToolsRubber,
             this.formMainMenuStripToolsText});
-            this.formMainMenuStripTools.Location = new System.Drawing.Point(0, 28);
+            this.formMainMenuStripTools.Location = new System.Drawing.Point(0, 30);
             this.formMainMenuStripTools.Name = "formMainMenuStripTools";
-            this.formMainMenuStripTools.Size = new System.Drawing.Size(782, 28);
+            this.formMainMenuStripTools.Size = new System.Drawing.Size(782, 30);
             this.formMainMenuStripTools.TabIndex = 4;
             // 
             // formMainMenuStripToolsRect

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
@@ -36,21 +35,13 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         private Bitmap mapDrawing;
         private Bitmap mapSaved;
         private Graphics graphics;
-        private Pen pen;
-
         private Image clipboard;
+        private Pen pen;
 
         public FormMain() {
             InitializeComponent();
 
             this.DoubleBuffered = true;
-
-            mapDrawing = new Bitmap(formMainPictureBox.Width, formMainPictureBox.Height);
-            mapSaved = new Bitmap(formMainPictureBox.Width, formMainPictureBox.Height);
-            graphics = Graphics.FromImage(mapDrawing);
-            graphics.SmoothingMode = SmoothingMode.HighQuality;
-            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            formMainPictureBox.Image = mapDrawing;
 
             ofd.Filter = "Bitmap file|*.bmp|PNG file|.png|JPG file|.jpg|TIFF file|.tiff|GIF file|.gif|Any format|*.*";
             sfd.Filter = "Bitmap file|*.bmp|PNG file|.png|JPG file|.jpg|TIFF file|.tiff|GIF file|.gif|Any format|*.*";
@@ -58,18 +49,23 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             pen = createTool(Color.Black);
 
             updateScreen();
+            updateStatusBar();
+
             changeIcon();
             changeTitle();
-            updateStatusBar();
         }
 
         private void updateScreen() {
             mapDrawing = new Bitmap(windowSizeX, windowSizeY);
             mapSaved = new Bitmap(windowSizeX, windowSizeY);
+
             graphics = Graphics.FromImage(mapDrawing);
             graphics.Clear(Color.White);
             graphics.SmoothingMode = SmoothingMode.HighQuality;
             graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            formMainPictureBox.Image = mapDrawing;
+            formMainPictureBox.Invalidate();
         }
         
         private void changeIcon() {
@@ -101,8 +97,8 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         public void updateStatusBar() {
             formMainStatusBarSize.Text = string.Format("Размер окна: {0} x {1}", this.Width, this.Height);
             formMainStatusBarScale.Text = "Масштаб: 100%";
+
             formMainStatusBar.Update();
-            formMainStatusBar.Refresh();
         }
 
         private Pen createTool(Color color) {
@@ -220,7 +216,6 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
         }
 
         private void FormMain_Resize(object sender, EventArgs e) {
-            formMainPictureBox.Location = new Point(0, formMainMenuStrip.Location.Y + formMainMenuStripTools.Location.Y + formMainPanel.Location.Y);
             formMainPictureBox.Width = this.Width - 30;
             formMainPictureBox.Height = this.Height - 120;
 
@@ -237,6 +232,8 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
             fileIsSaved = true;
 
             updateScreen();
+            updateStatusBar();
+
             changeIcon();
             changeTitle();
         }
@@ -253,8 +250,16 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
 
         private void formMainFileOpen_Click(object sender, EventArgs e) {
             if (fileIsSaved == false) {
-                if (showFormSave() == false) {
-                    return;
+                if (showFormSave() == true) {
+                    if (sfd.ShowDialog() == DialogResult.OK) {
+                        saveFile();
+
+                        fileIsNew = false;
+                        fileIsSaved = true;
+                    } else {
+                        fileIsNew = false;
+                        fileIsSaved = false;
+                    }
                 }
             }
 
@@ -262,9 +267,11 @@ namespace KPFU_2_sem_programming_PaintPlusPlus {
 
             if (ofd.ShowDialog() == DialogResult.OK) {
                 fileName = ofd.FileName;
+                sfd.FileName = ofd.FileName;
 
-                updateScreen();
-                formMainPictureBox.Image = new Bitmap(ofd.FileName);
+                clipboard = new Bitmap(ofd.FileName);
+                CtrlV();
+                clipboard = null;
 
                 fileIsNew = false;
                 fileIsSaved = true;
